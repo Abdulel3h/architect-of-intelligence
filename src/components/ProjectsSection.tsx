@@ -3,41 +3,40 @@ import { useRef } from "react";
 
 const projects = [
   {
-    title: "Wida AI Presentation Engine",
-    description: "Converts Arabic documents into branded PowerPoint decks via a two-phase LLM pipeline with streaming generation.",
-    tags: ["LangGraph", "PptxGenJS", "Vercel AI SDK"],
+    title: "Chat UB",
+    description: "AI-powered academic chatbot serving all colleges at University of Bisha. Graduation project delivering intelligent Q&A across departments with NLP pipelines.",
+    tags: ["NLP", "Python", "Azure", "Chatbot"],
     accent: "cobalt",
+    domain: "Education",
   },
   {
-    title: "Wida-RAG System",
-    description: "Automated Arabic government tender proposal generation using multilingual RAG with Cohere embeddings.",
-    tags: ["LlamaIndex", "ChromaDB", "Cohere"],
-    accent: "cobalt",
-  },
-  {
-    title: "Ophthalmology MCQ Bank",
-    description: "Clinically rigorous AI-generated exam questions with IRB-compliant documentation for medical education.",
-    tags: ["Claude API", "FastAPI", "Supabase"],
-    accent: "mint",
-  },
-  {
-    title: "Bilingual Clinical Tools",
-    description: "Informed consent forms and KAMC research documentation tools supporting Arabic & English workflows.",
-    tags: ["Next.js", "TypeScript", "Zod"],
+    title: "Qanouni",
+    description: "AI Legal Advisor helping employees understand Saudi labor rights using generative AI. Deployed on Microsoft Azure for production users.",
+    tags: ["Generative AI", "Azure", "NLP", "Legal Tech"],
     accent: "gold",
+    domain: "Legal",
+  },
+  {
+    title: "Medad",
+    description: "AI fintech platform for financial inclusion featuring Power BI dashboards, predictive analytics, and intelligent financial guidance.",
+    tags: ["Power BI", "ML", "Python", "Fintech"],
+    accent: "mint",
+    domain: "Finance",
+  },
+  {
+    title: "Virtual Astronauts",
+    description: "VR + AI personalized learning platform for space education. Combines immersive experiences with adaptive AI to teach astronomy.",
+    tags: ["VR", "AI", "Education", "2024"],
+    accent: "purple",
+    domain: "VR/Space",
   },
 ];
 
-const accentBorder: Record<string, string> = {
+const accentColors: Record<string, string> = {
   cobalt: "border-l-cobalt",
   mint: "border-l-mint",
   gold: "border-l-gold",
-};
-
-const accentGlow: Record<string, string> = {
-  cobalt: "glow-cobalt",
-  mint: "glow-mint",
-  gold: "glow-gold",
+  purple: "border-l-purple",
 };
 
 export default function ProjectsSection() {
@@ -54,7 +53,7 @@ export default function ProjectsSection() {
         >
           <p className="font-display text-xs tracking-[0.4em] text-gold uppercase mb-4">Projects</p>
           <h2 className="font-display text-3xl sm:text-4xl text-soft-white mb-16">
-            Systems in Production
+            Shipped & Proven
           </h2>
         </motion.div>
 
@@ -66,10 +65,13 @@ export default function ProjectsSection() {
               animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
               transition={{ delay: 0.2 + i * 0.15, duration: 0.7 }}
               whileHover={{ y: -8, rotateY: 2, scale: 1.02 }}
-              className={`glass-card holographic-shimmer rounded-xl p-8 border-l-2 ${accentBorder[project.accent]} hover:${accentGlow[project.accent]} transition-all duration-500`}
+              className={`glass-card holographic-shimmer rounded-xl p-8 border-l-2 ${accentColors[project.accent]} transition-all duration-500`}
               style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
             >
-              <h3 className="font-display text-lg text-soft-white mb-3 tracking-wide">{project.title}</h3>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-display text-lg text-soft-white tracking-wide">{project.title}</h3>
+                <span className={`text-[10px] font-display tracking-widest uppercase text-${project.accent}`}>{project.domain}</span>
+              </div>
               <p className="text-sm text-muted-foreground leading-relaxed mb-6">{project.description}</p>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (

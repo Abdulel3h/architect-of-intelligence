@@ -2,10 +2,10 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const techGroups = [
-  { label: "AI / LLM", items: ["LangGraph", "LangChain", "LlamaIndex", "Vercel AI SDK", "Cohere", "Claude API"], color: "cobalt" },
-  { label: "Frontend", items: ["Next.js", "React", "TypeScript", "PptxGenJS"], color: "mint" },
-  { label: "Backend", items: ["Python", "FastAPI", "Node.js", "Supabase", "ChromaDB"], color: "gold" },
-  { label: "Protocols", items: ["SSE Streaming", "REST", "MCP Protocol", "Zod"], color: "cobalt" },
+  { label: "AI / ML", items: ["Python", "Machine Learning", "NLP", "Generative AI", "LLMs"], color: "cobalt" },
+  { label: "Cloud", items: ["Azure AI Services", "Azure Deployment", "Cloud Computing", "REST APIs"], color: "mint" },
+  { label: "Data", items: ["SQL", "Power BI", "Data Visualization", "R Programming"], color: "gold" },
+  { label: "Dev Tools", items: ["GitHub", "Web Development", "TypeScript", "FastAPI"], color: "cobalt" },
 ];
 
 export default function StackSection() {
@@ -45,7 +45,7 @@ export default function StackSection() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={inView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ delay: 0.4 + gi * 0.1 + i * 0.05, duration: 0.4 }}
-                    whileHover={{ scale: 1.08, boxShadow: `0 0 20px oklch(0.55 0.25 260 / 30%)` }}
+                    whileHover={{ scale: 1.08, boxShadow: "0 0 20px oklch(0.55 0.25 260 / 30%)" }}
                     className="px-3 py-1.5 rounded-md text-xs font-display tracking-wider bg-secondary text-soft-white border border-border hover:border-cobalt/50 transition-colors cursor-default"
                   >
                     {item}
