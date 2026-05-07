@@ -1,26 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
+import Navigation from "../components/Navigation";
+import HeroSection from "../components/HeroSection";
+import AboutSection from "../components/AboutSection";
+import StackSection from "../components/StackSection";
+import ProjectsSection from "../components/ProjectsSection";
+import ExperienceSection from "../components/ExperienceSection";
+import ContactSection from "../components/ContactSection";
+import ScrollProgress from "../components/ScrollProgress";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Abdulelah Al-Khathami — AI Engineer & Technical Lead" },
+      { name: "description", content: "Technical Lead & AI Engineer building intelligent systems in Arabic at scale. Specializing in LLM systems, medical informatics, and Arabic NLP." },
+      { property: "og:title", content: "Abdulelah Al-Khathami — AI Engineer" },
+      { property: "og:description", content: "Building intelligent systems. In Arabic. At scale." },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="relative">
+      <Navigation />
+      <ScrollProgress />
+      <HeroSection />
+      <AboutSection />
+      <StackSection />
+      <ProjectsSection />
+      <ExperienceSection />
+      <ContactSection />
+      <footer className="py-8 text-center">
+        <p className="font-display text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
+          © 2026 Abdulelah Al-Khathami · Built with precision
+        </p>
+      </footer>
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
