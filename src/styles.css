@@ -56,7 +56,8 @@
   --color-soft-white: var(--soft-white);
   --font-display: 'Syne Mono', monospace;
   --font-body: 'IBM Plex Sans', sans-serif;
-  --font-arabic: 'Cairo', sans-serif;
+  --font-arabic: 'Tajawal', sans-serif;
+  --color-purple: var(--purple);
 }
 
 :root {
@@ -94,9 +95,10 @@
   --sidebar-border: oklch(0.2 0.03 260);
   --sidebar-ring: oklch(0.55 0.25 260);
   --cobalt: oklch(0.55 0.25 260);
-  --mint: oklch(0.85 0.2 165);
+  --mint: oklch(0.85 0.25 155);
   --gold: oklch(0.72 0.14 85);
   --soft-white: oklch(0.93 0.01 250);
+  --purple: oklch(0.55 0.3 295);
 }
 
 @layer base {
@@ -155,6 +157,10 @@
 
   .glow-gold {
     box-shadow: 0 0 30px oklch(0.72 0.14 85 / 25%), 0 0 60px oklch(0.72 0.14 85 / 10%);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 30px oklch(0.55 0.3 295 / 25%), 0 0 60px oklch(0.55 0.3 295 / 10%);
   }
 
   .section-container {

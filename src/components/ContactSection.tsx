@@ -17,10 +17,10 @@ export default function ContactSection() {
         >
           <p className="font-display text-xs tracking-[0.4em] text-gold uppercase mb-4">Contact</p>
           <h2 className="font-display text-3xl sm:text-4xl text-soft-white mb-4">
-            Let's Build Something
+            Let's Build Together
           </h2>
           <p className="text-muted-foreground text-sm">
-            Open to collaborations in AI engineering, Arabic NLP, and medical informatics.
+            Open to AI engineering roles, collaborations, and hackathon partnerships.
           </p>
         </motion.div>
 
@@ -67,12 +67,16 @@ export default function ContactSection() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="flex justify-center items-center gap-8 mt-16 text-sm text-muted-foreground font-display tracking-wider"
+          className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-16 text-sm text-muted-foreground font-display tracking-wider"
         >
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-cobalt transition-colors">
-            LinkedIn ↗
+          <a href="mailto:Abdul0l0h.0@gmail.com" className="hover:text-cobalt transition-colors">
+            Abdul0l0h.0@gmail.com
           </a>
-          <span className="text-border">|</span>
+          <span className="hidden sm:inline text-border">|</span>
+          <a href="tel:+966550746952" className="hover:text-cobalt transition-colors">
+            +966 550 746 952
+          </a>
+          <span className="hidden sm:inline text-border">|</span>
           <span className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-mint animate-pulse" />
             Riyadh, KSA

@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 
 const links = [
   { label: "About", href: "#about" },
-  { label: "Stack", href: "#stack" },
   { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
+  { label: "Awards", href: "#awards" },
+  { label: "Stack", href: "#stack" },
+  { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -16,12 +17,12 @@ export default function Navigation() {
       transition={{ delay: 3.5, duration: 0.8 }}
       className="fixed top-0 left-0 right-0 z-50 flex justify-center py-6"
     >
-      <div className="flex items-center gap-8 px-6 py-2 glass-card rounded-full">
+      <div className="flex items-center gap-4 sm:gap-8 px-4 sm:px-6 py-2 glass-card rounded-full overflow-x-auto">
         {links.map((link) => (
           <a
             key={link.href}
             href={link.href}
-            className="font-display text-[10px] tracking-[0.3em] uppercase text-muted-foreground hover:text-cobalt transition-colors"
+            className="font-display text-[10px] tracking-[0.3em] uppercase text-muted-foreground hover:text-cobalt transition-colors whitespace-nowrap"
           >
             {link.label}
           </a>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import NeuralGlobe from "./NeuralGlobe";
 
 const letterVariants = {
@@ -22,6 +23,34 @@ function AnimatedText({ text, className }: { text: string; className?: string })
   );
 }
 
+function TypewriterText({ text, delay = 2 }: { text: string; delay?: number }) {
+  const [displayed, setDisplayed] = useState("");
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setStarted(true), delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!started) return;
+    if (displayed.length >= text.length) return;
+    const timeout = setTimeout(() => {
+      setDisplayed(text.slice(0, displayed.length + 1));
+    }, 50);
+    return () => clearTimeout(timeout);
+  }, [started, displayed, text]);
+
+  return (
+    <span>
+      {displayed}
+      {displayed.length < text.length && started && (
+        <motion.span animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.6 }} className="text-mint">|</motion.span>
+      )}
+    </span>
+  );
+}
+
 export default function HeroSection() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -39,23 +68,23 @@ export default function HeroSection() {
         <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight tracking-tight">
           <AnimatedText text="Abdulelah" className="text-soft-white" />
           <br />
-          <AnimatedText text="Al-Khathami" className="text-gradient-cobalt" />
+          <AnimatedText text="Alkhathami" className="text-gradient-cobalt" />
         </h1>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 0.8 }}
+          transition={{ delay: 1.8, duration: 0.8 }}
           className="mt-6 font-display text-sm sm:text-base tracking-[0.3em] uppercase text-muted-foreground"
         >
-          Technical Lead · AI Engineer · LLM Systems Architect
+          AI Engineer · Machine Learning · Intelligent Systems
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.7 }}
-          transition={{ delay: 2.5, duration: 1 }}
+          animate={{ opacity: 0.9 }}
+          transition={{ delay: 2.2, duration: 1 }}
           className="mt-4 text-mint text-sm sm:text-base font-display tracking-wider"
         >
-          Building intelligent systems. In Arabic. At scale.
+          <TypewriterText text="Building AI that actually works." delay={2.5} />
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
@@ -68,7 +97,6 @@ export default function HeroSection() {
           </a>
         </motion.div>
       </div>
-      {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
