@@ -76,15 +76,15 @@ export default function HeroSection() {
           transition={{ delay: 1.8, duration: 0.8 }}
           className="mt-6 font-display text-sm sm:text-base tracking-[0.3em] uppercase text-muted-foreground"
         >
-          AI Engineer · Machine Learning · Intelligent Systems
+          Senior AI Solutions Specialist · Full-Stack Developer
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.9 }}
           transition={{ delay: 2.2, duration: 1 }}
-          className="mt-4 text-mint text-sm sm:text-base font-display tracking-wider"
+          className="mt-4 text-gold text-sm sm:text-base font-display tracking-wider"
         >
-          <TypewriterText text="Building AI that actually works." delay={2.5} />
+          <TypewriterText text="Architecting Intelligent Enterprise Ecosystems." delay={2.5} />
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}

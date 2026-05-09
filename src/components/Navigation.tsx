@@ -1,32 +1,68 @@
+import { Languages } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage, type AppLanguage } from "@/lib/language/LanguageProvider";
 
-const links = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Awards", href: "#awards" },
-  { label: "Stack", href: "#stack" },
-  { label: "Education", href: "#education" },
-  { label: "Contact", href: "#contact" },
-];
+const links: Record<AppLanguage, Array<{ label: string; href: string }>> = {
+  ar: [
+    { label: "الفحص", href: "#scanner" },
+    { label: "الأمثلة", href: "#case-studies" },
+    { label: "الوكلاء", href: "#agents" },
+    { label: "التصميم", href: "#architecture-generator" },
+    { label: "تواصل", href: "#contact" },
+  ],
+  en: [
+    { label: "Scanner", href: "#scanner" },
+    { label: "Cases", href: "#case-studies" },
+    { label: "Agents", href: "#agents" },
+    { label: "Design", href: "#architecture-generator" },
+    { label: "Contact", href: "#contact" },
+  ],
+};
 
 export default function Navigation() {
+  const { language, setLanguage, isArabic } = useLanguage();
+
   return (
     <motion.nav
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 3.5, duration: 0.8 }}
-      className="fixed top-0 left-0 right-0 z-50 flex justify-center py-6"
+      transition={{ duration: 0.45 }}
+      className="fixed left-0 right-0 top-0 z-50 flex justify-center px-4 py-4"
     >
-      <div className="flex items-center gap-4 sm:gap-8 px-4 sm:px-6 py-2 glass-card rounded-full overflow-x-auto">
-        {links.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="font-display text-[10px] tracking-[0.3em] uppercase text-muted-foreground hover:text-cobalt transition-colors whitespace-nowrap"
+      <div className="nav-shell">
+        <a
+          href="#top"
+          className="nav-brand"
+          aria-label={isArabic ? "العودة لبداية الصفحة" : "Back to homepage"}
+        >
+          AOI
+        </a>
+        <div className="nav-links">
+          {links[language].map((link) => (
+            <a key={link.href} href={link.href}>
+              {link.label}
+            </a>
+          ))}
+        </div>
+        <div className="language-switcher" aria-label={isArabic ? "تبديل اللغة" : "Switch language"}>
+          <Languages size={15} aria-hidden="true" />
+          <button
+            type="button"
+            className={language === "ar" ? "active" : ""}
+            aria-pressed={language === "ar"}
+            onClick={() => setLanguage("ar")}
           >
-            {link.label}
-          </a>
-        ))}
+            عربي
+          </button>
+          <button
+            type="button"
+            className={language === "en" ? "active" : ""}
+            aria-pressed={language === "en"}
+            onClick={() => setLanguage("en")}
+          >
+            EN
+          </button>
+        </div>
       </div>
     </motion.nav>
   );

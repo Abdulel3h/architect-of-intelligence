@@ -1,41 +1,48 @@
 import { createFileRoute } from "@tanstack/react-router";
-import Navigation from "../components/Navigation";
-import HeroSection from "../components/HeroSection";
-import AboutSection from "../components/AboutSection";
-import ProjectsSection from "../components/ProjectsSection";
-import AwardsSection from "../components/AwardsSection";
-import StackSection from "../components/StackSection";
-import EducationSection from "../components/EducationSection";
-import ContactSection from "../components/ContactSection";
-import ScrollProgress from "../components/ScrollProgress";
+import Navigation from "@/components/Navigation";
+import ScrollProgress from "@/components/ScrollProgress";
+import { HomePage } from "@/features/home/components/HomePage";
+import { personJsonLd, siteConfig } from "@/lib/seo/site";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Abdulelah Alkhathami — AI Engineer & Intelligent Systems Builder" },
-      { name: "description", content: "AI Engineer building intelligent systems across legal, fintech & education. Hackathon winner, Azure deployer, shipping real AI products from Riyadh." },
-      { property: "og:title", content: "Abdulelah Alkhathami — AI Engineer" },
-      { property: "og:description", content: "Building AI that actually works." },
+      { title: siteConfig.title },
+      { name: "description", content: siteConfig.description },
+      { name: "robots", content: "index, follow" },
+      { property: "og:title", content: siteConfig.title },
+      { property: "og:description", content: siteConfig.description },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: siteConfig.locale },
+      { property: "og:url", content: siteConfig.url },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: siteConfig.title },
+      { name: "twitter:description", content: siteConfig.description },
+    ],
+    links: [{ rel: "canonical", href: siteConfig.url }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(personJsonLd),
+      },
     ],
   }),
 });
 
 function Index() {
   return (
-    <div className="relative">
+    <div className="relative min-h-screen bg-background text-foreground selection:bg-cobalt/30">
       <Navigation />
       <ScrollProgress />
-      <HeroSection />
-      <AboutSection />
-      <ProjectsSection />
-      <AwardsSection />
-      <StackSection />
-      <EducationSection />
-      <ContactSection />
-      <footer className="py-8 text-center">
-        <p className="font-display text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
-          © 2026 Abdulelah Alkhathami · Built with ambition
+
+      <main>
+        <HomePage />
+      </main>
+
+      <footer className="border-t border-white/10 py-10 text-center">
+        <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+          © 2026 Abdulelah Alkhathami · Architect of Intelligence
         </p>
       </footer>
     </div>
