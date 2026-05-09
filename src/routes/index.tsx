@@ -20,7 +20,10 @@ export const Route = createFileRoute("/")({
       { name: "twitter:title", content: siteConfig.title },
       { name: "twitter:description", content: siteConfig.description },
     ],
-    links: [{ rel: "canonical", href: siteConfig.url }],
+    links: [
+      { rel: "canonical", href: siteConfig.url },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
@@ -42,7 +45,7 @@ function Index() {
 
       <footer className="border-t border-white/10 py-10 text-center">
         <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
-          © 2026 Abdulelah Alkhathami · Architect of Intelligence
+          © 2026 AIO Labs · AI Systems Studio from Riyadh
         </p>
       </footer>
     </div>

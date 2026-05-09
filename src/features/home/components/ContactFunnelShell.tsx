@@ -12,13 +12,13 @@ const intentLabels: Record<string, string> = {
   "AI Agent": "وكيل AI",
   "RAG System": "نظام RAG",
   Automation: "أتمتة",
-  Workshop: "ورشة",
+  Workshop: "تشخيص",
   Hiring: "تعاون هندسي",
 };
 const urgencyLabels: Record<string, string> = {
-  Exploring: "نستكشف",
+  Exploring: "نستكشف بهدوء",
   "This quarter": "هذا الربع",
-  Now: "الآن",
+  Now: "نبي نتحرك الحين",
 };
 const intentLabelsEn: Record<string, string> = {
   "AI Agent": "AI Agent",

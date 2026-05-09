@@ -2,16 +2,16 @@ import { useLanguage } from "@/lib/language/LanguageProvider";
 
 const proofPoints = {
   ar: [
-    { value: "4", label: "منتجات AI انبنت وانطلقت" },
+    { value: "4", label: "أنظمة AI انبنت وانطلقت" },
     { value: "2", label: "فوز بهاكاثونات وطنية" },
     { value: "85%", label: "تحسن بكفاءة التشغيل" },
-    { value: "KSA", label: "مهندس AI من الرياض" },
+    { value: "KSA", label: "استوديو AI من الرياض" },
   ],
   en: [
-    { value: "4", label: "AI products shipped" },
+    { value: "4", label: "AI systems shipped" },
     { value: "2", label: "national hackathon wins" },
     { value: "85%", label: "workflow efficiency gain" },
-    { value: "KSA", label: "Riyadh-based AI builder" },
+    { value: "KSA", label: "Saudi AI systems studio" },
   ],
 };
 

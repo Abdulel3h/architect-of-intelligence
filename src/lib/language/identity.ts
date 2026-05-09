@@ -18,28 +18,28 @@ export function dualOutput<InternalOutput, UserOutput>(
 
 export const uiCopy = {
   scanner: {
-    eyebrow: "فاحص فرص الذكاء الاصطناعي",
-    title: "خلنا نطلع أول نظـام AI يستاهل تبنيه.",
+    eyebrow: "AI Opportunity Scanner",
+    title: "خلنا نشوف وش نقدر نسوي.",
     progressLabel: "تقدم الفحص",
-    steps: ["السياق", "الشغل", "الجاهزية", "النتيجة"],
+    steps: ["السياق", "المسار", "الجاهزية", "التصور"],
     environment: "وش أقرب وصف لبيئتكم؟",
-    leverage: "وين تحس إن الذكاء الاصطناعي بيجيب فرق أكبر؟",
+    leverage: "وين تتوقع الذكاء يجيب فرق واضح؟",
     tools: "وين عايش الشغل اليوم؟",
-    hoursLost: "ساعات تضيع بالأسبوع",
+    hoursLost: "ساعات تروح بالأسبوع",
     urgency: "الاستعجال",
-    recommendedFirstSystem: "أول نظـام نقترحه",
+    recommendedFirstSystem: "أول نظام نقترحه",
     businessValue: "القيمة على الشغل",
     systemShape: "شكل النظام",
-    emailLabel: "أرسل لي ملخص البناء بعدين",
+    emailLabel: "أرسل لي ملخص البناء",
     emailPlaceholder: "you@company.com",
     back: "رجوع",
-    continue: "كمـل",
+    continue: "كمّل",
     footnote:
-      "نسخة V1 تستخدم تقييم واضح وثابت. طبقة تقرير الـ LLM جاهزة للربط بالمرحلة الجاية.",
+      "التقييم هنا واضح وثابت. طبقة التقرير الذكي جاهزة للربط في المرحلة الجاية.",
   },
   generator: {
-    eyebrow: "مولد شكل النظام",
-    title: "طلع لي تصور واضح لنظـام AI.",
+    eyebrow: "AI Architecture Generator",
+    title: "ورّني شكل النظام.",
     businessType: "نوع الجهة",
     goal: "الهدف",
     dataMaturity: "ترتيب البيانات",
@@ -49,7 +49,7 @@ export const uiCopy = {
   },
   decision: {
     leadSignal: "إشارة الفـرصة",
-    businessMeaning: "وش يعني هذا تجارياً؟",
+    businessMeaning: "وش معناها على الشغل؟",
     nextStep: "الخطوة الجاية",
     recommendedOffer: "العرض الأنـسب",
   },
@@ -62,7 +62,7 @@ export const uiCopy = {
   caseStudies: {
     problem: "المشكلة",
     systemDesign: "تصميم النظام",
-    discussSimilar: "أبغى نظام قريب من هذا",
+    discussSimilar: "أبغى نظام قريب من كذا",
   },
 } as const;
 
@@ -118,7 +118,7 @@ export const uiCopyEn = {
 
 export const optionCopy = {
   organizations: {
-    startup: "ستارتب أو فريق منتج",
+    startup: "شركة ناشئة أو فريق منتج",
     agency: "وكالة أو بزنس خدمات",
     enterprise: "فريق داخل شركة كبيرة",
     education: "تعليم أو تدريب",
@@ -137,7 +137,7 @@ export const optionCopy = {
   },
   businessTypes: {
     agency: "وكالة",
-    startup: "ستارتب",
+    startup: "شركة ناشئة",
     enterprise: "شركة كبيرة",
     education: "تعليم",
   },
@@ -197,7 +197,7 @@ export const optionCopyEn = {
 export const systemUserCopy: Record<string, { title: string; explanation: string }> = {
   "RAG Support Agent": {
     title: "RAG Support Agent",
-    explanation: "نظام يرد من مصادر موثوقة بدل ما يخلي الفريق يدور بكل ملف.",
+    explanation: "نظام يجاوب من مصادر موثوقة بدل ما يخلي الفريق يدور في كل ملف.",
   },
   "Enterprise Knowledge RAG": {
     title: "Enterprise Knowledge RAG",
@@ -205,7 +205,7 @@ export const systemUserCopy: Record<string, { title: string; explanation: string
   },
   "Lead Qualification Agent": {
     title: "Lead Qualification Agent",
-    explanation: "وكيل يفرز الطلبات والفرص ويقول لك وش الخطوة الأنسب.",
+    explanation: "وكيل يفرز الطلبات والفرص ويقترح لك الخطوة الأنسب.",
   },
   "Workflow Automation Agent": {
     title: "Workflow Automation Agent",
@@ -242,11 +242,11 @@ export const offerUserCopy = {
 } as const;
 
 export const ctaUserCopy = {
-  "strategy-call": "احجـز معي",
-  "ai-diagnostic": "خلنا نشخـص الوضع",
-  "agent-sprint": "أبغى وكيل مثل هـذا",
+  "strategy-call": "خلنا نحكي عن النظام",
+  "ai-diagnostic": "خلنا نشخص الوضع",
+  "agent-sprint": "أبغى وكيل مثل هذا",
   "rag-sprint": "ورني خطـة RAG",
-  "automation-sprint": "ورني حل الأتمتـة",
+  "automation-sprint": "ورني حل الأتمتة",
 } as const;
 
 export const impactUserCopy = {

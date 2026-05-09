@@ -9,10 +9,10 @@ import {
 } from "lucide-react";
 
 export const proofPoints = [
-  { value: "4", label: "منتجات AI انبنت وانطلقت" },
+  { value: "4", label: "أنظمة AI انبنت وانطلقت" },
   { value: "2", label: "فوز بهاكاثونات وطنية" },
   { value: "85%", label: "تحسن بكفاءة التشغيل" },
-  { value: "KSA", label: "مهندس AI من الرياض" },
+  { value: "KSA", label: "استوديو AI من الرياض" },
 ];
 
 export const labTools = [
@@ -20,19 +20,19 @@ export const labTools = [
     title: "AI Opportunity Scanner",
     description: "يشخص أول نظام AI يستاهل تبنيه لفريقك أو مسار عملك أو منتجك.",
     icon: BrainCircuit,
-    status: "شغال v1",
+    status: "Live v1",
   },
   {
     title: "Architecture Generator",
-    description: "يحول المشكلة التجارية لتصور RAG أو وكيل أو أتمتة أو تحليلات.",
+    description: "يحول المشكلة التجارية إلى تصور معماري لوكيل، RAG، أتمتة، أو تحليلات.",
     icon: Network,
-    status: "شغال v1",
+    status: "Live v1",
   },
   {
     title: "ROI Simulator",
-    description: "يحسب الوقت المتوقع توفيره والتعقيد وأول نتيجة قابلة للقياس.",
+    description: "يقيس الوقت المتوقع توفيره والتعقيد وأول نتيجة نقدر نتابعها.",
     icon: BarChart3,
-    status: "قريب",
+    status: "Next",
   },
 ];
 

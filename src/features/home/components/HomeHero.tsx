@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ActionLink } from "@/components/ui/action-button";
+import { AioLogo } from "@/components/brand/AioLogo";
 import { IntelligenceMap } from "@/components/visuals/IntelligenceMap";
 import { useLanguage } from "@/lib/language/LanguageProvider";
 import { homeCopy } from "@/lib/language/copy";
@@ -18,8 +19,14 @@ export function HomeHero() {
           transition={{ duration: 0.55, ease: "easeOut" }}
           className="hero-content"
         >
+          <AioLogo className="hero-logo" />
           <p className="eyebrow">{copy.eyebrow}</p>
-          <h1>{copy.title}</h1>
+          <h1
+            className="hero-title"
+            style={{ fontFamily: '"Thmanyah Sans", Arial, "IBM Plex Sans", "Segoe UI", sans-serif' }}
+          >
+            {copy.title}
+          </h1>
           <p className="hero-copy">{copy.body}</p>
           <div className="hero-actions">
             <ActionLink href="#scanner">{copy.primaryCta}</ActionLink>
@@ -43,6 +50,13 @@ export function HomeHero() {
           <div className="console-topline">
             <span>{copy.console.brief}</span>
             <strong>{copy.console.live}</strong>
+          </div>
+          <div className="console-architecture" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
           </div>
           <div className="console-row">
             <span>{copy.console.offer}</span>

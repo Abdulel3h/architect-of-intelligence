@@ -1,8 +1,8 @@
 export const siteConfig = {
-  name: "Abdulelah Alkhathami",
-  title: "Abdulelah Alkhathami | وكلاء وأنظمة AI",
+  name: "AIO Labs",
+  title: "AIO Labs | AI Systems, Agents, and Intelligent Workflows",
   description:
-    "مهندس AI في الرياض يبني وكلاء AI وأنظمة RAG وأتمتة وتحليلات وواجهات منتج جاهزة للشغل الفعلي.",
+    "A Saudi AI systems studio founded by Abdulelah, building agents, RAG systems, automation, analytics, and intelligent infrastructure with a Najdi voice.",
   url: "https://architect-of-intelligence.com",
   author: "Abdulelah Alkhathami",
   email: "Abdul0l0h.0@gmail.com",
@@ -13,9 +13,13 @@ export const siteConfig = {
 
 export const personJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
+  "@type": "Organization",
   name: siteConfig.name,
-  jobTitle: "AI Engineer and AI Solutions Specialist",
+  founder: {
+    "@type": "Person",
+    name: siteConfig.author,
+    jobTitle: "AI Systems Architect",
+  },
   description: siteConfig.description,
   email: `mailto:${siteConfig.email}`,
   telephone: siteConfig.phone,

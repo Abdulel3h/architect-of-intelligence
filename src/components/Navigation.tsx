@@ -1,20 +1,21 @@
 import { Languages } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage, type AppLanguage } from "@/lib/language/LanguageProvider";
+import { AioLogo } from "@/components/brand/AioLogo";
 
 const links: Record<AppLanguage, Array<{ label: string; href: string }>> = {
   ar: [
-    { label: "الفحص", href: "#scanner" },
-    { label: "الأمثلة", href: "#case-studies" },
+    { label: "التشخيص", href: "#scanner" },
+    { label: "الأنظمة", href: "#case-studies" },
     { label: "الوكلاء", href: "#agents" },
-    { label: "التصميم", href: "#architecture-generator" },
-    { label: "تواصل", href: "#contact" },
+    { label: "المعمارية", href: "#architecture-generator" },
+    { label: "ابدأ", href: "#contact" },
   ],
   en: [
     { label: "Scanner", href: "#scanner" },
-    { label: "Cases", href: "#case-studies" },
+    { label: "Systems", href: "#case-studies" },
     { label: "Agents", href: "#agents" },
-    { label: "Design", href: "#architecture-generator" },
+    { label: "Architecture", href: "#architecture-generator" },
     { label: "Contact", href: "#contact" },
   ],
 };
@@ -35,7 +36,7 @@ export default function Navigation() {
           className="nav-brand"
           aria-label={isArabic ? "العودة لبداية الصفحة" : "Back to homepage"}
         >
-          AOI
+          <AioLogo />
         </a>
         <div className="nav-links">
           {links[language].map((link) => (
