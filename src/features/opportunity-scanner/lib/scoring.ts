@@ -7,6 +7,7 @@ import {
 } from "@/lib/language/identity";
 
 export type ScannerChoice = {
+  problem: string;
   organization: string;
   challenge: string;
   tools: string[];
@@ -54,6 +55,7 @@ const challengeSystems: Record<string, string> = {
 };
 
 export const initialScannerChoice: ScannerChoice = {
+  problem: "",
   organization: "startup",
   challenge: "operations",
   tools: [],
@@ -85,10 +87,11 @@ export function calculateScannerReport(choice: ScannerChoice): ScannerReport {
     system: recommendedSystem,
     urgency: choice.urgency,
   });
+
   const businessValue = [
-    "Reduce repeated manual decisions before adding more headcount.",
-    "Create a measurable first AI workflow instead of a generic chatbot.",
-    "Capture operational knowledge in a reusable system layer.",
+    "Reduce repeated manual decisions before increasing headcount.",
+    "Create a measurable AI workflow instead of a generic chatbot.",
+    "Capture operational knowledge in a reusable infrastructure layer.",
   ];
   const architecture = [
     "Intake form or connected workspace trigger",
@@ -107,18 +110,19 @@ export function calculateScannerReport(choice: ScannerChoice): ScannerReport {
     readiness === "High-leverage"
       ? "This is ready for a strategy call."
       : "Start with a focused AI diagnostic sprint.";
+
   const systemCopy = systemUserCopy[recommendedSystem] ?? systemUserCopy["AI Workflow Diagnostic"];
   const userBusinessValue = [
     "نخفف القرارات اليدوية المتكررة قبل ما تحتاج تزيد عدد الفريق.",
-    "نطلع أول مسـار AI قابل للقياس بدل شات بوت عام ما يخدم الهدف.",
+    "نطلع أول Workflow AI قابل للقياس بدل شات بوت عام ما يخدم الهدف.",
     "نرتب معرفة التشغيل داخل طبقة نظام تقدر ترجع لها وتبني عليها.",
   ];
   const userArchitecture = [
     "مدخل واضح للطلب أو ربط مع الأداة اللي يبدأ منها الشغل.",
     "طبقة سياق تجمع المعرفة ومسار العمل.",
-    "خطوة تفكير للوكيل مع حدود ومراجعة واضحة.",
+    "خطوة تفكير للـ Agent مع حدود ومراجعة واضحة.",
     "نقطة موافقة بشرية للأشياء الحساسة أو عالية الأثر.",
-    "لوحة متابعة للاستخدام والتوفير والجودة.",
+    "Dashboard لمتابعة الاستخدام والتوفير والجودة.",
   ];
   const userFirstSprint = [
     "نرسم مسار العمل ونحدد وش بنقيس.",
@@ -128,8 +132,8 @@ export function calculateScannerReport(choice: ScannerChoice): ScannerReport {
   ];
   const userCta =
     readiness === "High-leverage"
-      ? "الوضع جاهز لمكالمة استراتيجية ونطلع منه خطـة تنفيذ."
-      : "الأفضل نبدأ بتشخيص AI مركز ونحدد أول فـرصة صح.";
+      ? "الوضع جاهز لمكالمة استراتيجية ونطلع منه خطة تنفيذ."
+      : "الأفضل نبدأ بتشخيص AI مركز ونحدد أول فرصة صح.";
 
   return {
     score,

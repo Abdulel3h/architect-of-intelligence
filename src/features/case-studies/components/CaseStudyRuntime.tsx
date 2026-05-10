@@ -22,7 +22,9 @@ export function CaseStudyRuntime({ caseStudy }: { caseStudy: CaseStudy }) {
       <div className="case-runtime-header">
         <div>
           <p className="eyebrow">
-            {isArabic ? `أثر ${impactUserCopy[caseStudy.impactLevel]}` : `${caseStudy.impactLevel} impact`}
+            {isArabic
+              ? `أثر ${impactUserCopy[caseStudy.impactLevel]}`
+              : `${caseStudy.impactLevel} impact`}
           </p>
           <h3>{caseStudy.title}</h3>
           <p>{isArabic ? caseStudy.userOutput.description : caseStudy.description}</p>

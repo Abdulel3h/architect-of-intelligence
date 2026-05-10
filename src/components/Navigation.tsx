@@ -1,27 +1,10 @@
 import { Languages } from "lucide-react";
 import { motion } from "framer-motion";
-import { useLanguage, type AppLanguage } from "@/lib/language/LanguageProvider";
+import { useLanguage } from "@/lib/language/LanguageProvider";
 import { AioLogo } from "@/components/brand/AioLogo";
 
-const links: Record<AppLanguage, Array<{ label: string; href: string }>> = {
-  ar: [
-    { label: "التشخيص", href: "#scanner" },
-    { label: "الأنظمة", href: "#case-studies" },
-    { label: "الوكلاء", href: "#agents" },
-    { label: "المعمارية", href: "#architecture-generator" },
-    { label: "ابدأ", href: "#contact" },
-  ],
-  en: [
-    { label: "Scanner", href: "#scanner" },
-    { label: "Systems", href: "#case-studies" },
-    { label: "Agents", href: "#agents" },
-    { label: "Architecture", href: "#architecture-generator" },
-    { label: "Contact", href: "#contact" },
-  ],
-};
-
 export default function Navigation() {
-  const { language, setLanguage, isArabic } = useLanguage();
+  const { language, setLanguage, copy } = useLanguage();
 
   return (
     <motion.nav
@@ -31,21 +14,17 @@ export default function Navigation() {
       className="fixed left-0 right-0 top-0 z-50 flex justify-center px-4 py-4"
     >
       <div className="nav-shell">
-        <a
-          href="#top"
-          className="nav-brand"
-          aria-label={isArabic ? "العودة لبداية الصفحة" : "Back to homepage"}
-        >
+        <a href="#top" className="nav-brand" aria-label={copy.nav.home}>
           <AioLogo />
         </a>
         <div className="nav-links">
-          {links[language].map((link) => (
+          {copy.nav.links.map((link) => (
             <a key={link.href} href={link.href}>
               {link.label}
             </a>
           ))}
         </div>
-        <div className="language-switcher" aria-label={isArabic ? "تبديل اللغة" : "Switch language"}>
+        <div className="language-switcher" aria-label={copy.nav.switchLanguage}>
           <Languages size={15} aria-hidden="true" />
           <button
             type="button"

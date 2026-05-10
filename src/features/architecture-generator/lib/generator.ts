@@ -62,7 +62,6 @@ export function generateArchitecture(input: ArchitectureGeneratorInput): Generat
     "Human Review Gate",
     "Metrics Dashboard",
   ];
-
   const dataFlow = [
     "Capture the workflow request and business context.",
     "Normalize documents, tool data, or user input into structured context.",
@@ -83,7 +82,8 @@ export function generateArchitecture(input: ArchitectureGeneratorInput): Generat
   ];
   const title = `${system} for ${input.businessType} ${input.goal}`;
   const summary = `A practical ${system.toLowerCase()} architecture that starts from ${source.toLowerCase()} and turns it into a measurable workflow.`;
-  const systemCopy = systemUserCopy[system];
+
+  const systemCopy = systemUserCopy[system] ?? systemUserCopy["AI Workflow Diagnostic"];
   const sourceUser =
     input.dataMaturity === "integrated"
       ? "مصادر بيانات مربوطة"
@@ -92,15 +92,15 @@ export function generateArchitecture(input: ArchitectureGeneratorInput): Generat
         : "ملفات وأدوات متفرقة";
   const userComponents = [
     sourceUser,
-    "منظم للسياق",
+    "منظّم للسياق",
     systemCopy.title,
     "بوابة مراجعة بشرية",
-    "لوحة متابعة للنتائج",
+    "Dashboard لمتابعة النتائج",
   ];
   const userDataFlow = [
     "نلتقط طلب العمل والسياق التجاري حوله.",
     "نرتب الملفات أو بيانات الأدوات أو مدخلات المستخدم كسياق واضح.",
-    `نشغل ${systemCopy.title} بحدود واضحة ومصادر ظاهرة.`,
+    `نشغّل ${systemCopy.title} بحدود واضحة ومصادر ظاهرة.`,
     "نمرر القرارات الحساسة أو عالية الأثر لمراجعة بشرية.",
     "نتابع التبني والجودة والوقت الموفر ونقاط الفشل.",
   ];

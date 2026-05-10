@@ -1,14 +1,20 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type { Agent } from "@/content";
 import { SurfaceCard } from "@/components/ui/surface-card";
+import { ActionButton } from "@/components/ui/action-button";
 import { DecisionPanel } from "@/features/conversion/DecisionPanel";
 import { decideNextAction } from "@/features/conversion/decision-layer";
 import { simulateAgentRun } from "../lib/runtime";
 import { impactUserCopy, uiCopy, uiCopyEn } from "@/lib/language/identity";
 import { useLanguage } from "@/lib/language/LanguageProvider";
+import { runAgentRuntime, trackUserEvent } from "@/lib/ai/client";
+import type { AgentRunOutput } from "@/lib/ai/schemas";
 
 export function AgentRuntimePreview({ agent }: { agent: Agent }) {
   const { isArabic } = useLanguage();
+  const [runtimeInput, setRuntimeInput] = useState("");
+  const [aiResult, setAiResult] = useState<AgentRunOutput | null>(null);
+  const [isRunning, setIsRunning] = useState(false);
   const result = useMemo(() => simulateAgentRun(agent), [agent]);
   const decision = useMemo(
     () =>
@@ -20,7 +26,29 @@ export function AgentRuntimePreview({ agent }: { agent: Agent }) {
     [agent],
   );
   const copy = isArabic ? uiCopy : uiCopyEn;
-  const runtimeOutput = isArabic ? result.output.user_output : result.output.internal_output;
+  const runtimeOutput =
+    aiResult?.output[isArabic ? "user_output" : "internal_output"] ??
+    (isArabic ? result.output.user_output : result.output.internal_output);
+  const runtimeSteps = aiResult ? runtimeOutput.steps : result.steps;
+
+  const run = async () => {
+    setIsRunning(true);
+    try {
+      const response = await runAgentRuntime({
+        agentId: agent.id,
+        agentName: agent.name,
+        input: runtimeInput || agent.input,
+      });
+      setAiResult(response);
+      trackUserEvent({
+        name: "agent_runtime_generated",
+        page: "/",
+        properties: { agentId: agent.id },
+      });
+    } finally {
+      setIsRunning(false);
+    }
+  };
 
   return (
     <SurfaceCard className="agent-runtime-card">
@@ -46,8 +74,33 @@ export function AgentRuntimePreview({ agent }: { agent: Agent }) {
         </div>
       </div>
 
+      <div className="agent-live-input">
+        <label>
+          {isArabic ? "اختبر الوكيل على مدخل حقيقي" : "Run this agent on real input"}
+          <textarea
+            rows={4}
+            value={runtimeInput}
+            placeholder={
+              isArabic
+                ? "اكتب رسالة عميل، سؤال دعم، أو مهمة تشغيلية تحتاج قرار واضح..."
+                : "Paste a customer message, support question, or workflow task..."
+            }
+            onChange={(event) => setRuntimeInput(event.target.value)}
+          />
+        </label>
+        <ActionButton type="button" onClick={run} disabled={isRunning}>
+          {isRunning
+            ? isArabic
+              ? "الوكيل يعالج..."
+              : "Agent running..."
+            : isArabic
+              ? "شغّل المسار"
+              : "Run agent"}
+        </ActionButton>
+      </div>
+
       <div className="runtime-steps">
-        {result.steps.map((step, index) => (
+        {runtimeSteps.map((step, index) => (
           <div key={step.label} className="runtime-step">
             <strong>{String(index + 1).padStart(2, "0")}</strong>
             <div>

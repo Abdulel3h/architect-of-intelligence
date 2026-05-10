@@ -23,7 +23,9 @@ export function HomeHero() {
           <p className="eyebrow">{copy.eyebrow}</p>
           <h1
             className="hero-title"
-            style={{ fontFamily: '"Thmanyah Sans", Arial, "IBM Plex Sans", "Segoe UI", sans-serif' }}
+            style={{
+              fontFamily: '"Thmanyah Sans", Arial, "IBM Plex Sans", "Segoe UI", sans-serif',
+            }}
           >
             {copy.title}
           </h1>
@@ -47,6 +49,10 @@ export function HomeHero() {
           transition={{ duration: 0.55, delay: 0.12, ease: "easeOut" }}
           className="hero-console"
         >
+          <div className="console-statusbar" aria-hidden="true">
+            <span>AIO COMMAND LAYER</span>
+            <span>RUNTIME: STABLE</span>
+          </div>
           <div className="console-topline">
             <span>{copy.console.brief}</span>
             <strong>{copy.console.live}</strong>
@@ -57,6 +63,12 @@ export function HomeHero() {
             <span />
             <span />
             <span />
+          </div>
+          <div className="console-metrics" aria-hidden="true">
+            <span>ORCHESTRATION</span>
+            <strong>04 ACTIVE SYSTEMS</strong>
+            <span>DECISION LAYER</span>
+            <strong>READY</strong>
           </div>
           <div className="console-row">
             <span>{copy.console.offer}</span>

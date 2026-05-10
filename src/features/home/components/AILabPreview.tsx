@@ -29,7 +29,7 @@ export function AILabPreview() {
             <div>
               <div className="tool-status">{tool.status}</div>
               <h3>{tool.title}</h3>
-              <p>{tool.description}</p>
+              <p>{tool.description[language]}</p>
             </div>
           </SurfaceCard>
         ))}

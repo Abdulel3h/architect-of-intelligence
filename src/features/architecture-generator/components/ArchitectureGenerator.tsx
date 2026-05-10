@@ -1,9 +1,12 @@
 import { useMemo, useState } from "react";
 import { SurfaceCard } from "@/components/ui/surface-card";
+import { ActionButton } from "@/components/ui/action-button";
 import { DecisionPanel } from "@/features/conversion/DecisionPanel";
 import { generateArchitecture, type ArchitectureGeneratorInput } from "../lib/generator";
 import { optionCopy, optionCopyEn, uiCopy, uiCopyEn } from "@/lib/language/identity";
 import { useLanguage } from "@/lib/language/LanguageProvider";
+import { runArchitectureGeneration, trackUserEvent } from "@/lib/ai/client";
+import type { ArchitectureAiOutput } from "@/lib/ai/schemas";
 
 const businessTypes: ArchitectureGeneratorInput["businessType"][] = [
   "agency",
@@ -25,17 +28,39 @@ const maturities: ArchitectureGeneratorInput["dataMaturity"][] = [
 ];
 
 export function ArchitectureGenerator() {
-  const { isArabic } = useLanguage();
+  const { isArabic, language } = useLanguage();
   const [input, setInput] = useState<ArchitectureGeneratorInput>({
     businessType: "agency",
     goal: "operations",
     dataMaturity: "scattered",
   });
+  const [context, setContext] = useState("");
+  const [aiArchitecture, setAiArchitecture] = useState<ArchitectureAiOutput | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const architecture = useMemo(() => generateArchitecture(input), [input]);
   const copy = isArabic ? uiCopy : uiCopyEn;
   const options = isArabic ? optionCopy : optionCopyEn;
-  const architectureOutput = isArabic ? architecture.output.user_output : architecture.output.internal_output;
+  const architectureOutput = isArabic
+    ? architecture.output.user_output
+    : architecture.output.internal_output;
+  const realOutput = aiArchitecture?.output[isArabic ? "user_output" : "internal_output"];
+  const view = realOutput ?? architectureOutput;
+
+  const generate = async () => {
+    setIsGenerating(true);
+    try {
+      const result = await runArchitectureGeneration({ ...input, context, language });
+      setAiArchitecture(result);
+      trackUserEvent({
+        name: "architecture_generated",
+        page: "/",
+        properties: { goal: input.goal, dataMaturity: input.dataMaturity },
+      });
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   return (
     <SurfaceCard className="architecture-generator">
@@ -69,20 +94,54 @@ export function ArchitectureGenerator() {
           onChange={(value) => setInput((current) => ({ ...current, dataMaturity: value }))}
         />
       </div>
+      <label className="generator-context">
+        {copy.generator.contextLabel}
+        <textarea
+          rows={4}
+          value={context}
+          placeholder={copy.generator.contextPlaceholder}
+          onChange={(event) => setContext(event.target.value)}
+        />
+      </label>
+      <ActionButton
+        type="button"
+        className="generator-submit"
+        onClick={generate}
+        disabled={isGenerating}
+      >
+        {isGenerating ? copy.generator.generating : copy.generator.generate}
+      </ActionButton>
 
       <div className="generated-report">
-        <h4>{architectureOutput.title}</h4>
-        <p>{architectureOutput.summary}</p>
+        <h4>{view.title}</h4>
+        <p>{view.summary}</p>
 
         <div className="report-columns">
-          <ReportBlock title={copy.generator.components} items={architectureOutput.components} />
-          <ReportBlock title={copy.generator.firstBuild} items={architectureOutput.firstBuild} />
+          <ReportBlock title={copy.generator.components} items={view.components} />
+          <ReportBlock
+            title={copy.generator.orchestrationFlow}
+            items={
+              "orchestrationFlow" in view ? view.orchestrationFlow : architectureOutput.dataFlow
+            }
+          />
+          <ReportBlock
+            title={copy.generator.storageLayer}
+            items={"storageLayer" in view ? view.storageLayer : architectureOutput.dataFlow}
+          />
+          <ReportBlock
+            title={copy.generator.firstBuild}
+            items={
+              "implementationPhases" in view
+                ? view.implementationPhases
+                : architectureOutput.firstBuild
+            }
+          />
         </div>
 
         <DecisionPanel decision={architecture.decision} />
 
         <pre className="mermaid-source" aria-label={copy.generator.technicalPlan} dir="ltr">
-          {architecture.output.internal_output.mermaid}
+          {view.mermaid}
         </pre>
       </div>
     </SurfaceCard>

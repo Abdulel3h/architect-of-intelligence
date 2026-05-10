@@ -11,12 +11,7 @@ export function AgentRuntimeEngine() {
   const copy = homeCopy[language].agents;
 
   return (
-    <Section
-      id="agents"
-      eyebrow={copy.eyebrow}
-      title={copy.title}
-      description={copy.description}
-    >
+    <Section id="agents" eyebrow={copy.eyebrow} title={copy.title} description={copy.description}>
       <div className="agent-layout">
         <div className="agent-tabs" role="tablist" aria-label={copy.tabsLabel}>
           {agents.map((agent) => (

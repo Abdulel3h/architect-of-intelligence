@@ -8,30 +8,36 @@ import { homeCopy } from "@/lib/language/copy";
 
 const intents = ["AI Agent", "RAG System", "Automation", "Workshop", "Hiring"];
 const urgencyOptions = ["Exploring", "This quarter", "Now"];
-const intentLabels: Record<string, string> = {
-  "AI Agent": "وكيل AI",
-  "RAG System": "نظام RAG",
-  Automation: "أتمتة",
-  Workshop: "تشخيص",
-  Hiring: "تعاون هندسي",
-};
-const urgencyLabels: Record<string, string> = {
-  Exploring: "نستكشف بهدوء",
-  "This quarter": "هذا الربع",
-  Now: "نبي نتحرك الحين",
-};
-const intentLabelsEn: Record<string, string> = {
-  "AI Agent": "AI Agent",
-  "RAG System": "RAG System",
-  Automation: "Automation",
-  Workshop: "Workshop",
-  Hiring: "Hiring",
-};
-const urgencyLabelsEn: Record<string, string> = {
-  Exploring: "Exploring",
-  "This quarter": "This quarter",
-  Now: "Now",
-};
+
+const intentLabels = {
+  ar: {
+    "AI Agent": "وكيل AI",
+    "RAG System": "نظام RAG",
+    Automation: "أتمتة",
+    Workshop: "تشخيص",
+    Hiring: "تعاون هندسي",
+  },
+  en: {
+    "AI Agent": "AI Agent",
+    "RAG System": "RAG System",
+    Automation: "Automation",
+    Workshop: "Diagnostic",
+    Hiring: "Engineering Partnership",
+  },
+} as const;
+
+const urgencyLabels = {
+  ar: {
+    Exploring: "نستكشف بهدوء",
+    "This quarter": "هذا الربع",
+    Now: "نبي نتحرك الحين",
+  },
+  en: {
+    Exploring: "Exploring",
+    "This quarter": "This quarter",
+    Now: "Now",
+  },
+} as const;
 
 const intentToSystem: Record<string, string> = {
   "AI Agent": "AI Agent System",
@@ -54,8 +60,8 @@ export function ContactFunnelShell() {
     [intent, urgency],
   );
   const copy = homeCopy[language].contact;
-  const localizedIntentLabels = isArabic ? intentLabels : intentLabelsEn;
-  const localizedUrgencyLabels = isArabic ? urgencyLabels : urgencyLabelsEn;
+  const localizedIntentLabels = intentLabels[language];
+  const localizedUrgencyLabels = urgencyLabels[language];
   const decisionOutput = isArabic ? decision.output.user_output : decision.output.internal_output;
 
   return (
@@ -76,7 +82,7 @@ export function ContactFunnelShell() {
               className={intent === item ? "active" : ""}
               onClick={() => setIntent(item)}
             >
-              {localizedIntentLabels[item]}
+              {localizedIntentLabels[item as keyof typeof localizedIntentLabels]}
             </button>
           ))}
         </div>
@@ -88,7 +94,7 @@ export function ContactFunnelShell() {
               className={urgency === item ? "active" : ""}
               onClick={() => setUrgency(item)}
             >
-              {localizedUrgencyLabels[item]}
+              {localizedUrgencyLabels[item as keyof typeof localizedUrgencyLabels]}
             </button>
           ))}
         </div>
@@ -105,7 +111,9 @@ export function ContactFunnelShell() {
             {copy.improve}
             <textarea
               rows={4}
-              placeholder={copy.textarea(localizedIntentLabels[intent])}
+              placeholder={copy.textarea(
+                localizedIntentLabels[intent as keyof typeof localizedIntentLabels],
+              )}
             />
           </label>
         </div>

@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import ScrollProgress from "@/components/ScrollProgress";
 import { HomePage } from "@/features/home/components/HomePage";
 import { personJsonLd, siteConfig } from "@/lib/seo/site";
+import { useLanguage } from "@/lib/language/LanguageProvider";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -34,18 +35,25 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { copy } = useLanguage();
+
   return (
-    <div className="relative min-h-screen bg-background text-foreground selection:bg-cobalt/30">
+    <div className="app-shell relative min-h-screen bg-background text-foreground selection:bg-cobalt/30">
+      <div className="background-architecture" aria-hidden="true">
+        <span className="background-depth depth-a" />
+        <span className="background-depth depth-b" />
+        <span className="background-depth depth-c" />
+      </div>
       <Navigation />
       <ScrollProgress />
 
-      <main>
+      <main className="relative z-10">
         <HomePage />
       </main>
 
-      <footer className="border-t border-white/10 py-10 text-center">
-        <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
-          © 2026 AIO Labs · AI Systems Studio from Riyadh
+      <footer className="relative z-10 border-t border-white/10 py-10 text-center">
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+          {copy.ui.footer}
         </p>
       </footer>
     </div>

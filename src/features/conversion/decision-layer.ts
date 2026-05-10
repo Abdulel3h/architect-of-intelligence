@@ -44,8 +44,8 @@ type DecisionInput = {
 };
 
 const offerLabels: Record<OfferKey, string> = {
-  "strategy-call": "Book Call",
-  "ai-diagnostic": "Get AI Plan",
+  "strategy-call": "Book Strategy Call",
+  "ai-diagnostic": "Run AI Diagnostic",
   "agent-sprint": "Request Agent Sprint",
   "rag-sprint": "Request RAG Plan",
   "automation-sprint": "Request Automation Plan",
@@ -87,16 +87,16 @@ export function decideNextAction(input: DecisionInput): Decision {
         : "Use a lightweight AI plan to find the highest-leverage starting point.";
   const userBusinessMeaning =
     leadStrength === "strong"
-      ? "الوضع عندك جاهز لكلام جاد عن التنفيذ. فيه استعجال ومساحة تشغيلية تستاهل نحدد لها سبرنت واضـح."
+      ? "الوضع عندك جاهز لكلام جاد عن التنفيذ. فيه استعجال ومساحة تشغيلية تستاهل نحدد لها Sprint واضح."
       : leadStrength === "medium"
-        ? "فيه فـرصة حلوة، بس الأفضل نبدأ بتشخيص ضيق عشان ما نبني نظام ما يخدم الشغل فعلياً."
+        ? "فيه فرصة حلوة، بس الأفضل نبدأ بتشخيص ضيق عشان ما نبني نظام ما يخدم الشغل فعلياً."
         : "الفكرة لسه تحتاج ترتيب. نوضح مسار العمل وجودة البيانات وأول نتيجة نقدر نقيسها.";
   const userNextStep =
     leadStrength === "strong"
-      ? "نحول النتيجة لملخص بناء واضـح ونحدد أول سبرنت."
+      ? "نحول النتيجة لملخص بناء واضح ونحدد أول Sprint."
       : leadStrength === "medium"
         ? "نرسم مسار العمل ونختار مقياس واحد قبل التنفيذ."
-        : "نبدأ بخطـة خفيفة تطلع أعلى نقطة فيها عائد.";
+        : "نبدأ بخطة خفيفة تطلع أعلى نقطة فيها عائد.";
   const ctaLabel = offerLabels[offer];
   const userCtaLabel = ctaUserCopy[offer];
 

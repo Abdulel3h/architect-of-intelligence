@@ -5,7 +5,7 @@ import { useLanguage } from "@/lib/language/LanguageProvider";
 const nodeUserRoles: Record<string, Record<string, { label: string; role: string }>> = {
   "multi-agent-automation": {
     intake: { label: "استقبال الطلب", role: "يلتقط سياق المهمة وحدودها." },
-    router: { label: "موجه الوكلاء", role: "يختار المسار المناسب لكل وكيل." },
+    router: { label: "موجّه الوكلاء", role: "يختار المسار المناسب لكل Agent." },
     agents: { label: "وكلاء متخصصين", role: "يبحثون ويكتبون ويثرون ويفرزون." },
     review: { label: "مراجعة بشرية", role: "تعتمد المخرجات عالية الأثر." },
     metrics: { label: "لوحة التشغيل", role: "تتابع السرعة والجودة والتوفير." },

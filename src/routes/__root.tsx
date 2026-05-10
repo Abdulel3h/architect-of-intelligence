@@ -11,22 +11,24 @@ import {
 import appCss from "../styles.css?url";
 import { siteConfig } from "@/lib/seo/site";
 import { LanguageProvider } from "@/lib/language/LanguageProvider";
+import { AnalyticsProvider } from "@/lib/analytics/AnalyticsProvider";
+import { uiCopy } from "@/lib/language/identity";
 
 function NotFoundComponent() {
+  const copy = uiCopy.errors;
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">الصفحة غير موجودة</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          الرابط اللي فتحته غير موجود أو تم نقله.
-        </p>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">{copy.notFoundTitle}</h2>
+        <p className="mt-2 text-sm text-muted-foreground">{copy.notFoundBody}</p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            ارجع للرئيسية
+            {copy.home}
           </Link>
         </div>
       </div>
@@ -37,16 +39,15 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
+  const copy = uiCopy.errors;
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          الصفحة ما حملت
+          {copy.pageFailedTitle}
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          صار خطأ من جهتنا. جرب تحدث الصفحة أو ارجع للرئيسية.
-        </p>
+        <p className="mt-2 text-sm text-muted-foreground">{copy.pageFailedBody}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
@@ -55,13 +56,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            جرب مرة ثانية
+            {copy.retry}
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            ارجع للرئيسية
+            {copy.home}
           </a>
         </div>
       </div>
@@ -97,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ar-SA" dir="rtl" data-language="ar">
+    <html lang="ar-SA" dir="rtl" data-language="ar" data-language-identity="najdi">
       <head>
         <HeadContent />
       </head>
@@ -114,9 +115,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        <Outlet />
-      </LanguageProvider>
+      <AnalyticsProvider>
+        <LanguageProvider>
+          <Outlet />
+        </LanguageProvider>
+      </AnalyticsProvider>
     </QueryClientProvider>
   );
 }
