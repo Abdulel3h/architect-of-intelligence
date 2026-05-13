@@ -33,6 +33,9 @@ export type RuntimeEnv = z.infer<typeof serverEnvSchema>;
 export type PublicEnv = z.infer<typeof publicEnvSchema>;
 export type RawEnv = Record<string, string | undefined>;
 
+const getDefaultPublicRawEnv = (): RawEnv =>
+  typeof import.meta !== "undefined" && import.meta.env ? (import.meta.env as RawEnv) : {};
+
 const serverOnlyKeys = [
   "OPENAI_API_KEY",
   "SUPABASE_SERVICE_ROLE_KEY",
@@ -50,7 +53,7 @@ const integrationRequirements = {
   storage: ["R2_ACCOUNT_ID", "R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY", "R2_BUCKET"] as const,
 } as const;
 
-export function getPublicEnv(raw: RawEnv): PublicEnv {
+export function getPublicEnv(raw: RawEnv = getDefaultPublicRawEnv()): PublicEnv {
   return publicEnvSchema.parse(raw);
 }
 

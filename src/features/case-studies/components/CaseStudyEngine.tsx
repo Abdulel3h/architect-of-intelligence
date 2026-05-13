@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { caseStudies } from "@/content";
 import { Section } from "@/components/layout/Section";
 import { CaseStudyRuntime } from "./CaseStudyRuntime";
@@ -17,8 +18,16 @@ export function CaseStudyEngine() {
       className="case-section"
     >
       <div className="case-engine-grid">
-        {caseStudies.map((caseStudy) => (
-          <CaseStudyRuntime key={caseStudy.id} caseStudy={caseStudy} />
+        {caseStudies.map((caseStudy, index) => (
+          <motion.div
+            key={caseStudy.id}
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-12% 0px" }}
+            transition={{ duration: 0.62, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <CaseStudyRuntime caseStudy={caseStudy} />
+          </motion.div>
         ))}
       </div>
     </Section>

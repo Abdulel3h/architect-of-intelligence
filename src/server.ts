@@ -95,7 +95,9 @@ function requireRateLimit(
   windowMs = 60_000,
 ): Response | null {
   const forwarded =
-    request.headers.get("cf-connecting-ip") ?? request.headers.get("x-forwarded-for");
+    request.headers.get("x-forwarded-for") ??
+    request.headers.get("x-real-ip") ??
+    request.headers.get("cf-connecting-ip");
   const ip = forwarded?.split(",")[0]?.trim() || "local";
   const bucketKey = `${key}:${ip}`;
   const now = Date.now();

@@ -1,5 +1,6 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 type Variant = "primary" | "secondary" | "ghost";
@@ -27,11 +28,19 @@ export function ActionButton({
   children,
   ...props
 }: ButtonProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <button className={cn("btn-base", variantClass[variant], className)} {...props}>
+    <motion.button
+      className={cn("btn-base", variantClass[variant], className)}
+      whileHover={!reduceMotion && !props.disabled ? { y: -2, scale: 1.015 } : undefined}
+      whileTap={!reduceMotion && !props.disabled ? { scale: 0.985 } : undefined}
+      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+      {...props}
+    >
       <span>{children}</span>
       {icon && <ArrowRight aria-hidden="true" size={16} />}
-    </button>
+    </motion.button>
   );
 }
 
@@ -42,10 +51,18 @@ export function ActionLink({
   children,
   ...props
 }: LinkProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <a className={cn("btn-base", variantClass[variant], className)} {...props}>
+    <motion.a
+      className={cn("btn-base", variantClass[variant], className)}
+      whileHover={!reduceMotion ? { y: -2, scale: 1.015 } : undefined}
+      whileTap={!reduceMotion ? { scale: 0.985 } : undefined}
+      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+      {...props}
+    >
       <span>{children}</span>
       {icon && <ArrowRight aria-hidden="true" size={16} />}
-    </a>
+    </motion.a>
   );
 }
