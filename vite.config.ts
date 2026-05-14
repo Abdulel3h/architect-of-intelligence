@@ -5,55 +5,53 @@ import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
+const getPackageName = (id: string) => {
+  const parts = id.split("node_modules/");
+  const packagePath = parts[parts.length - 1];
+  if (!packagePath) return;
+
+  const segments = packagePath.split("/");
+  if (segments[0]?.startsWith("@")) {
+    return `${segments[0]}/${segments[1]}`;
+  }
+
+  return segments[0];
+};
+
+const threePackages = new Set(["three", "three-stdlib", "@react-three/fiber", "@react-three/drei"]);
+
+const motionPackages = new Set(["framer-motion", "motion-dom", "motion-utils"]);
+
+const reactPackages = new Set(["react", "react-dom", "scheduler"]);
+
 export default defineConfig({
   build: {
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks(id) {
-          const normalizedId = id.replaceAll("\\", "/");
-          if (!normalizedId.includes("/node_modules/")) return;
+          if (!id.includes("node_modules")) return;
 
-          if (
-            normalizedId.includes("/node_modules/three/") ||
-            normalizedId.includes("/node_modules/three-stdlib/") ||
-            normalizedId.includes("/node_modules/fflate/")
-          ) {
-            return "vendor-three";
+          const packageName = getPackageName(id.replaceAll("\\", "/"));
+          if (!packageName) return;
+
+          if (threePackages.has(packageName)) {
+            return "vendor-3d";
           }
 
-          if (
-            normalizedId.includes("/node_modules/@react-three/") ||
-            normalizedId.includes("/node_modules/react-use-measure/") ||
-            normalizedId.includes("/node_modules/suspend-react/") ||
-            normalizedId.includes("/node_modules/its-fine/") ||
-            normalizedId.includes("/node_modules/zustand/")
-          ) {
-            return "vendor-r3f";
-          }
-
-          if (
-            normalizedId.includes("/node_modules/framer-motion/") ||
-            normalizedId.includes("/node_modules/motion-dom/") ||
-            normalizedId.includes("/node_modules/motion-utils/")
-          ) {
+          if (motionPackages.has(packageName)) {
             return "vendor-motion";
           }
 
-          if (
-            normalizedId.includes("/node_modules/react/") ||
-            normalizedId.includes("/node_modules/react-dom/") ||
-            normalizedId.includes("/node_modules/scheduler/") ||
-            normalizedId.includes("/node_modules/use-sync-external-store/")
-          ) {
+          if (reactPackages.has(packageName)) {
             return "vendor-react";
           }
 
-          if (normalizedId.includes("/node_modules/@tanstack/")) {
+          if (packageName.startsWith("@tanstack/")) {
             return "vendor-tanstack";
           }
 
-          if (normalizedId.includes("/node_modules/@radix-ui/")) {
+          if (packageName.startsWith("@radix-ui/")) {
             return "vendor-radix";
           }
         },

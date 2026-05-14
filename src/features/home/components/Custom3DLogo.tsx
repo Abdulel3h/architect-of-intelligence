@@ -1,6 +1,5 @@
 import { Suspense, useRef } from "react";
-import { Center } from "@react-three/drei/core/Center.js";
-import { useGLTF } from "@react-three/drei/core/Gltf.js";
+import { Center, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import type { Group } from "three";
 import { cn } from "@/lib/utils";
