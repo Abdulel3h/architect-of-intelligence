@@ -46,6 +46,7 @@ export function HeroSection() {
 
   return (
     <section id="top" className="hero-shell">
+      <div className="hero-liquid-mesh" aria-hidden="true" />
       <div className="container-grid hero-grid">
         <div className="hero-content hero-animate-in">
           <AioLogo className="hero-logo" />

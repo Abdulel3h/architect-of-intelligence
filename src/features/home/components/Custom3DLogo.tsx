@@ -19,15 +19,15 @@ function ProceduralLogo() {
   return (
     <group>
       <mesh rotation={[0.72, 0.14, 0.18]}>
-        <torusGeometry args={[1.05, 0.055, 12, 96]} />
+        <torusGeometry args={[1.05, 0.052, 8, 48]} />
         <meshStandardMaterial color="#f8fbff" metalness={0.74} roughness={0.24} />
       </mesh>
       <mesh rotation={[-0.22, 0.48, 0.08]} position={[0, 0, 0.02]}>
-        <torusGeometry args={[0.64, 0.038, 10, 80]} />
+        <torusGeometry args={[0.64, 0.034, 8, 40]} />
         <meshStandardMaterial color="#9ee8ff" metalness={0.55} roughness={0.32} />
       </mesh>
       <mesh position={[0, 0, 0.05]}>
-        <sphereGeometry args={[0.18, 32, 32]} />
+        <sphereGeometry args={[0.18, 16, 12]} />
         <meshStandardMaterial color="#ffffff" emissive="#7ddfff" emissiveIntensity={0.28} />
       </mesh>
       {[
@@ -36,7 +36,7 @@ function ProceduralLogo() {
         [0.34, 0.78, -0.1],
       ].map(([x, y, z]) => (
         <mesh key={`${x}-${y}-${z}`} position={[x, y, z]}>
-          <sphereGeometry args={[0.085, 24, 24]} />
+          <sphereGeometry args={[0.085, 12, 8]} />
           <meshStandardMaterial color="#f7fbff" emissive="#ffffff" emissiveIntensity={0.16} />
         </mesh>
       ))}
@@ -71,7 +71,7 @@ export function Custom3DLogo({ className, modelUrl }: Custom3DLogoProps) {
   return (
     <div className={cn("custom-3d-logo", className)}>
       <Canvas
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
         gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
         camera={{ position: [0, 0, 6.6], fov: 34 }}
       >

@@ -95,31 +95,34 @@
 
 @layer base {
   :root {
-    --background: oklch(0.075 0.008 260);
+    --background: oklch(0.055 0.012 252);
     --foreground: oklch(0.96 0.004 260);
-    --card: oklch(0.13 0.012 260 / 72%);
-    --muted: oklch(0.18 0.012 260 / 68%);
+    --card: oklch(0.15 0.014 252 / 68%);
+    --muted: oklch(0.18 0.014 252 / 66%);
     --muted-foreground: oklch(0.73 0.01 260);
-    --border: oklch(1 0 0 / 16%);
-    --input: oklch(1 0 0 / 14%);
+    --border: oklch(1 0 0 / 15%);
+    --input: oklch(1 0 0 / 13%);
     --ring: oklch(0.96 0.004 260 / 76%);
     --primary: oklch(0.94 0.006 260 / 92%);
-    --primary-foreground: oklch(0.12 0.012 260);
+    --primary-foreground: oklch(0.11 0.012 252);
     --accent: oklch(0.82 0.052 210);
-    --accent-foreground: oklch(0.09 0.012 260);
+    --accent-foreground: oklch(0.09 0.012 252);
     --destructive: oklch(0.66 0.18 30);
     --radius: 1.75rem;
     --font-body: "Google Sans Flex", "Thmanyah Sans", ui-sans-serif, system-ui, sans-serif;
     --font-arabic: "Thmanyah Sans", "Google Sans Flex", ui-sans-serif, system-ui, sans-serif;
     --font-code: "SFMono-Regular", "Cascadia Code", "Liberation Mono", monospace;
-    --glass-line: oklch(1 0 0 / 22%);
-    --glass-line-soft: oklch(1 0 0 / 11%);
+    --glass-line: oklch(1 0 0 / 18%);
+    --glass-line-soft: oklch(1 0 0 / 10%);
     --glass-white: oklch(1 0 0 / 78%);
     --glass-muted: oklch(0.84 0.006 260 / 72%);
-    --glass-black: oklch(0.07 0.008 260 / 62%);
-    --glass-surface: oklch(0.22 0.012 260 / 24%);
-    --glass-surface-strong: oklch(0.32 0.012 260 / 31%);
-    --glass-shadow: 0 30px 120px oklch(0 0 0 / 42%);
+    --glass-black: oklch(0.06 0.01 252 / 64%);
+    --glass-surface: oklch(0.22 0.018 248 / 23%);
+    --glass-surface-strong: oklch(0.34 0.018 248 / 34%);
+    --liquid-cyan: oklch(0.78 0.095 210);
+    --liquid-emerald: oklch(0.76 0.105 165);
+    --liquid-violet: oklch(0.68 0.11 285);
+    --glass-shadow: 0 34px 120px oklch(0 0 0 / 46%);
   }
 
   * {
@@ -129,7 +132,7 @@
   html {
     overflow-x: hidden;
     scroll-behavior: smooth;
-    background: #050609;
+    background: #030509;
     color-scheme: dark;
   }
 
@@ -137,7 +140,7 @@
     min-height: 100svh;
     margin: 0;
     overflow-x: hidden;
-    background: #050609;
+    background: #030509;
     color: var(--foreground);
     font-family: var(--font-body);
     font-optical-sizing: auto;
@@ -217,7 +220,11 @@
   .app-shell {
     isolation: isolate;
     overflow-x: clip;
-    background: transparent !important;
+    min-height: 100svh;
+    background:
+      radial-gradient(ellipse at 50% -16%, oklch(1 0 0 / 9%), transparent 38rem),
+      linear-gradient(180deg, transparent 0%, oklch(0 0 0 / 34%) 100%),
+      #030509 !important;
   }
 
   .app-shell::before,
@@ -231,21 +238,25 @@
   .app-shell::before {
     z-index: -2;
     background:
-      radial-gradient(circle at 18% 14%, oklch(0.62 0.08 215 / 20%), transparent 32rem),
-      radial-gradient(circle at 82% 4%, oklch(0.72 0.03 150 / 13%), transparent 26rem),
-      radial-gradient(circle at 58% 88%, oklch(0.38 0.08 280 / 18%), transparent 34rem),
-      linear-gradient(145deg, #050609 0%, #090d13 48%, #040507 100%);
+      radial-gradient(ellipse at 16% 8%, oklch(0.72 0.09 205 / 22%), transparent 34rem),
+      radial-gradient(ellipse at 88% 0%, oklch(0.73 0.09 160 / 15%), transparent 30rem),
+      radial-gradient(ellipse at 62% 78%, oklch(0.64 0.105 285 / 17%), transparent 38rem),
+      linear-gradient(118deg, #030509 0%, #081018 44%, #04060a 100%);
   }
 
   .app-shell::after {
     z-index: -1;
-    opacity: 0.22;
+    opacity: 0.2;
     background-image:
-      linear-gradient(90deg, oklch(1 0 0 / 8%) 1px, transparent 1px),
-      linear-gradient(0deg, oklch(1 0 0 / 6%) 1px, transparent 1px);
-    background-size: 96px 96px;
-    -webkit-mask-image: radial-gradient(circle at 50% 18%, black, transparent 68%);
-    mask-image: radial-gradient(circle at 50% 18%, black, transparent 68%);
+      linear-gradient(90deg, oklch(1 0 0 / 7%) 1px, transparent 1px),
+      linear-gradient(0deg, oklch(1 0 0 / 5%) 1px, transparent 1px),
+      radial-gradient(circle at 50% 12%, oklch(1 0 0 / 10%), transparent 34rem);
+    background-size:
+      112px 112px,
+      112px 112px,
+      auto;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 48%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 48%, transparent 100%);
   }
 
   .container-grid {
@@ -255,14 +266,25 @@
 
   .nav-shell {
     width: min(100%, 1160px);
-    border: 1px solid oklch(1 0 0 / 13%);
+    border: 1px solid oklch(1 0 0 / 16%);
     border-radius: 999px;
     background:
-      linear-gradient(135deg, oklch(1 0 0 / 10%), oklch(1 0 0 / 4%)),
-      oklch(0.08 0.008 260 / 86%);
+      linear-gradient(135deg, oklch(1 0 0 / 13%), oklch(1 0 0 / 4%)),
+      linear-gradient(90deg, oklch(0.78 0.095 210 / 8%), transparent 38%, oklch(0.76 0.105 165 / 7%)),
+      oklch(0.075 0.012 252 / 78%);
     box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 12%),
-      0 18px 70px oklch(0 0 0 / 30%);
+      inset 0 1px 0 oklch(1 0 0 / 16%),
+      inset 0 -1px 0 oklch(1 0 0 / 5%),
+      0 18px 70px oklch(0 0 0 / 34%);
+  }
+
+  @supports ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
+    .nav-shell,
+    .hero-title-panel,
+    .hero-logo-stage {
+      -webkit-backdrop-filter: blur(14px) saturate(118%);
+      backdrop-filter: blur(14px) saturate(118%);
+    }
   }
 
   .nav-shell-content {
@@ -427,7 +449,38 @@
     min-height: 94svh;
     display: flex;
     align-items: center;
+    overflow: hidden;
     padding-block: clamp(7.5rem, 12vw, 10rem) clamp(3rem, 7vw, 6rem);
+  }
+
+  .hero-shell::before {
+    content: "";
+    position: absolute;
+    inset: clamp(5.5rem, 9vw, 8rem) max(1rem, calc((100vw - 1240px) / 2)) clamp(2rem, 5vw, 4.5rem);
+    z-index: -1;
+    border: 1px solid oklch(1 0 0 / 7%);
+    border-radius: clamp(1.4rem, 3vw, 2.4rem);
+    background:
+      linear-gradient(120deg, oklch(1 0 0 / 9%), transparent 42%),
+      linear-gradient(290deg, oklch(0.78 0.095 210 / 9%), transparent 46%),
+      oklch(0.08 0.012 252 / 34%);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 11%),
+      0 32px 120px oklch(0 0 0 / 32%);
+  }
+
+  .hero-liquid-mesh {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 18% 28%, oklch(0.8 0.1 210 / 18%), transparent 30rem),
+      radial-gradient(ellipse at 88% 32%, oklch(0.75 0.1 165 / 13%), transparent 27rem),
+      radial-gradient(ellipse at 58% 68%, oklch(0.68 0.11 285 / 14%), transparent 34rem),
+      linear-gradient(135deg, oklch(1 0 0 / 5%), transparent 46%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 75%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 75%, transparent 100%);
   }
 
   .hero-grid {
@@ -447,9 +500,24 @@
   }
 
   .hero-content {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    max-width: 920px;
+  }
+
+  .hero-content::before {
+    content: "";
+    position: absolute;
+    inset: -1.15rem -1.2rem -1.25rem;
+    z-index: -1;
+    border: 1px solid oklch(1 0 0 / 8%);
+    border-radius: 1.45rem;
+    background:
+      linear-gradient(145deg, oklch(1 0 0 / 7%), oklch(1 0 0 / 2%) 52%, transparent),
+      oklch(0.08 0.012 252 / 18%);
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 10%);
   }
 
   html[data-language="ar"] .hero-content {
@@ -466,13 +534,38 @@
   }
 
   .hero-title-panel {
+    position: relative;
     width: min(100%, 920px);
     margin-top: 1rem;
+    overflow: hidden;
+    border: 1px solid oklch(1 0 0 / 15%);
+    border-radius: 1.25rem;
+    background:
+      linear-gradient(145deg, oklch(1 0 0 / 13%), oklch(1 0 0 / 4%) 46%, oklch(0 0 0 / 10%)),
+      linear-gradient(90deg, oklch(0.78 0.095 210 / 10%), transparent 42%, oklch(0.76 0.105 165 / 8%)),
+      oklch(0.09 0.014 252 / 62%);
+    padding: clamp(0.85rem, 2vw, 1.25rem);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 20%),
+      inset 0 -1px 0 oklch(1 0 0 / 7%),
+      var(--glass-shadow);
+  }
+
+  .hero-title-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(110deg, transparent 0%, oklch(1 0 0 / 10%) 42%, transparent 68%),
+      radial-gradient(ellipse at 12% 0%, oklch(1 0 0 / 18%), transparent 18rem);
   }
 
   .hero-title {
+    position: relative;
+    z-index: 1;
     max-width: 900px;
-    color: oklch(1 0 0 / 86%);
+    color: oklch(1 0 0 / 91%);
     font-size: clamp(2.85rem, 6.3vw, 6.25rem);
     font-weight: 920;
     line-height: 0.92;
@@ -489,7 +582,7 @@
   .hero-copy {
     max-width: 760px;
     margin-top: clamp(1.1rem, 2vw, 1.55rem);
-    color: oklch(0.9 0.006 260 / 74%);
+    color: oklch(0.92 0.006 260 / 78%);
     font-size: clamp(1.04rem, 1.45vw, 1.25rem);
     line-height: 1.8;
   }
@@ -510,10 +603,13 @@
 
   .hero-signal span {
     border-radius: 999px;
-    border: 1px solid oklch(1 0 0 / 14%);
-    background: oklch(1 0 0 / 8%);
-    color: oklch(1 0 0 / 66%);
+    border: 1px solid oklch(1 0 0 / 15%);
+    background:
+      linear-gradient(145deg, oklch(1 0 0 / 10%), oklch(1 0 0 / 4%)),
+      oklch(0.08 0.012 252 / 44%);
+    color: oklch(1 0 0 / 72%);
     padding: 0.55rem 0.75rem;
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 12%);
   }
 
   .hero-visual {
@@ -527,6 +623,16 @@
     width: min(100%, 24rem);
     min-height: clamp(16rem, 28vw, 23rem);
     aspect-ratio: 1;
+    border: 1px solid oklch(1 0 0 / 14%);
+    border-radius: clamp(1.1rem, 2vw, 1.6rem);
+    background:
+      linear-gradient(145deg, oklch(1 0 0 / 13%), oklch(1 0 0 / 3%) 48%, oklch(0 0 0 / 11%)),
+      linear-gradient(35deg, oklch(0.78 0.095 210 / 12%), transparent 42%, oklch(0.76 0.105 165 / 9%)),
+      oklch(0.075 0.012 252 / 52%);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 18%),
+      inset 0 -1px 0 oklch(1 0 0 / 6%),
+      0 28px 90px oklch(0 0 0 / 34%);
     contain: layout paint size;
     overflow: hidden;
   }
@@ -534,11 +640,22 @@
   .hero-logo-stage::before {
     content: "";
     position: absolute;
-    inset: 12%;
+    inset: 11%;
     border-radius: 50%;
     background:
-      radial-gradient(circle, oklch(0.84 0.05 215 / 24%), transparent 58%),
-      radial-gradient(circle, oklch(1 0 0 / 12%), transparent 72%);
+      radial-gradient(circle, oklch(0.84 0.08 210 / 28%), transparent 58%),
+      radial-gradient(circle, oklch(1 0 0 / 13%), transparent 72%);
+  }
+
+  .hero-logo-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background:
+      linear-gradient(120deg, oklch(1 0 0 / 16%), transparent 28%),
+      linear-gradient(to bottom, transparent 58%, oklch(0 0 0 / 18%));
   }
 
   .custom-3d-logo,
@@ -549,6 +666,10 @@
     display: block;
     width: 100%;
     height: 100%;
+  }
+
+  .custom-3d-logo canvas {
+    pointer-events: none;
   }
 
   .hero-3d-fallback {
@@ -640,14 +761,16 @@
   .surface-card {
     position: relative;
     overflow: hidden;
-    border: 1px solid oklch(1 0 0 / 12%);
+    border: 1px solid oklch(1 0 0 / 13%);
     border-radius: 0.5rem;
     background:
-      linear-gradient(145deg, oklch(1 0 0 / 8%), oklch(1 0 0 / 3%)),
-      oklch(0.09 0.009 260 / 76%);
+      linear-gradient(145deg, oklch(1 0 0 / 10%), oklch(1 0 0 / 3%) 52%, oklch(0 0 0 / 6%)),
+      linear-gradient(35deg, oklch(0.78 0.095 210 / 5%), transparent 46%, oklch(0.68 0.11 285 / 5%)),
+      oklch(0.08 0.012 252 / 70%);
     box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 10%),
-      0 18px 62px oklch(0 0 0 / 22%);
+      inset 0 1px 0 oklch(1 0 0 / 13%),
+      inset 0 -1px 0 oklch(1 0 0 / 4%),
+      0 18px 62px oklch(0 0 0 / 26%);
     contain: layout paint;
   }
 
@@ -667,7 +790,9 @@
     min-height: 8rem;
     border: 1px solid var(--glass-line-soft);
     border-radius: 0.5rem;
-    background: oklch(1 0 0 / 8%);
+    background:
+      linear-gradient(145deg, oklch(1 0 0 / 10%), oklch(1 0 0 / 4%)),
+      oklch(0.08 0.012 252 / 50%);
     padding: 1.2rem;
     box-shadow:
       inset 0 1px 0 oklch(1 0 0 / 16%),
@@ -720,14 +845,16 @@
 
   .btn-primary {
     background:
-      linear-gradient(135deg, oklch(1 0 0 / 88%), oklch(0.84 0.035 210 / 72%)),
+      linear-gradient(135deg, oklch(1 0 0 / 90%), oklch(0.84 0.055 205 / 78%)),
       oklch(1 0 0 / 70%);
     color: oklch(0.1 0.012 260);
   }
 
   .btn-secondary,
   .btn-ghost {
-    background: oklch(1 0 0 / 8%);
+    background:
+      linear-gradient(145deg, oklch(1 0 0 / 10%), oklch(1 0 0 / 4%)),
+      oklch(0.08 0.012 252 / 48%);
   }
 
   .btn-base:hover {
@@ -1460,9 +1587,29 @@
       padding-top: 8.6rem;
     }
 
+    .hero-shell::before {
+      inset: 7.5rem 0.5rem 1.25rem;
+      border-radius: 1.1rem;
+    }
+
+    .hero-content::before {
+      inset: -0.75rem -0.5rem -0.9rem;
+      border-radius: 1rem;
+    }
+
+    .hero-title-panel {
+      border-radius: 1rem;
+      padding: 0.7rem;
+    }
+
     .hero-title {
       font-size: clamp(2.5rem, 15vw, 4.1rem);
       line-height: 1;
+    }
+
+    .hero-logo-stage {
+      width: min(100%, 18rem);
+      min-height: 18rem;
     }
 
     .hero-actions,
