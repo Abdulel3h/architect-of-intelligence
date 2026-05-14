@@ -1,5 +1,6 @@
 import { Suspense, useRef } from "react";
-import { Center, useGLTF } from "@react-three/drei";
+import { Center } from "@react-three/drei/core/Center.js";
+import { useGLTF } from "@react-three/drei/core/Gltf.js";
 import { Canvas, useFrame } from "@react-three/fiber";
 import type { Group } from "three";
 import { cn } from "@/lib/utils";
@@ -57,7 +58,7 @@ function FloatingLogo({ modelUrl }: { modelUrl?: string }) {
   });
 
   return (
-    <group ref={groupRef} scale={1.35}>
+    <group ref={groupRef} scale={0.86}>
       <Center>
         <Suspense fallback={<ProceduralLogo />}>
           {modelUrl ? <ModelLogo modelUrl={modelUrl} /> : <ProceduralLogo />}
@@ -73,7 +74,7 @@ export function Custom3DLogo({ className, modelUrl }: Custom3DLogoProps) {
       <Canvas
         dpr={[1, 2]}
         gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
-        camera={{ position: [0, 0, 5.2], fov: 34 }}
+        camera={{ position: [0, 0, 6.6], fov: 34 }}
       >
         <ambientLight intensity={1.7} />
         <directionalLight position={[2.5, 3.5, 4]} intensity={2.4} />

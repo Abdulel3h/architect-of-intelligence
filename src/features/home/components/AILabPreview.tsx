@@ -22,10 +22,7 @@ export function AILabPreview() {
       </div>
       <div className="lab-tool-grid lab-tool-grid-wide">
         {labTools.map((tool) => (
-          <div
-            key={tool.title}
-            className="reveal-surface"
-          >
+          <div key={tool.title} className="reveal-surface">
             <SurfaceCard className="tool-card">
               <div className="tool-icon">
                 <tool.icon size={22} />

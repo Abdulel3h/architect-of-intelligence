@@ -76,24 +76,6 @@ export function HeroSection() {
 
         <aside className="hero-visual hero-animate-in hero-animate-in-delayed">
           <HeroLogoStage />
-          <div className="hero-system-card">
-            <div className="console-statusbar" aria-hidden="true">
-              <span>AIO COMMAND LAYER</span>
-              <span>RUNTIME: LIGHT</span>
-            </div>
-            <div className="console-topline">
-              <span>{copy.console.brief}</span>
-              <strong>{copy.console.live}</strong>
-            </div>
-            <div className="console-row">
-              <span>{copy.console.offer}</span>
-              <strong>{copy.console.offerValue}</strong>
-            </div>
-            <div className="console-row">
-              <span>{copy.console.outcome}</span>
-              <strong>{copy.console.outcomeValue}</strong>
-            </div>
-          </div>
         </aside>
       </div>
     </section>

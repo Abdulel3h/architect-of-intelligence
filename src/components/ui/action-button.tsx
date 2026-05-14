@@ -28,10 +28,7 @@ export function ActionButton({
   ...props
 }: ButtonProps) {
   return (
-    <button
-      className={cn("btn-base", variantClass[variant], className)}
-      {...props}
-    >
+    <button className={cn("btn-base", variantClass[variant], className)} {...props}>
       <span>{children}</span>
       {icon && <ArrowRight aria-hidden="true" size={16} />}
     </button>
