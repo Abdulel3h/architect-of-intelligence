@@ -6,7 +6,8 @@ import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
 const getPackageName = (id: string) => {
-  const parts = id.split("node_modules/");
+  const normalizedId = id.replaceAll("\\", "/");
+  const parts = normalizedId.split("node_modules/");
   const packagePath = parts[parts.length - 1];
   if (!packagePath) return;
 
@@ -18,10 +19,6 @@ const getPackageName = (id: string) => {
   return segments[0];
 };
 
-const threePackages = new Set(["three", "three-stdlib", "@react-three/fiber", "@react-three/drei"]);
-
-const motionPackages = new Set(["framer-motion", "motion-dom", "motion-utils"]);
-
 const reactPackages = new Set(["react", "react-dom", "scheduler"]);
 
 export default defineConfig({
@@ -32,14 +29,22 @@ export default defineConfig({
         manualChunks(id) {
           if (!id.includes("node_modules")) return;
 
-          const packageName = getPackageName(id.replaceAll("\\", "/"));
+          const packageName = getPackageName(id);
           if (!packageName) return;
 
-          if (threePackages.has(packageName)) {
+          if (
+            packageName === "three" ||
+            packageName === "three-stdlib" ||
+            packageName.startsWith("@react-three/")
+          ) {
             return "vendor-3d";
           }
 
-          if (motionPackages.has(packageName)) {
+          if (
+            packageName === "framer-motion" ||
+            packageName === "motion" ||
+            packageName.startsWith("motion-")
+          ) {
             return "vendor-motion";
           }
 
@@ -64,7 +69,14 @@ export default defineConfig({
         entry: "server",
       },
     }),
-    nitro(),
+    nitro({
+      preset: "vercel",
+      vercel: {
+        config: {
+          cache: [],
+        },
+      },
+    }),
     react(),
     tsConfigPaths(),
     tailwindcss(),

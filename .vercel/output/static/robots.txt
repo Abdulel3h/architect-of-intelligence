@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://architect-of-intelligence.com/sitemap.xml
