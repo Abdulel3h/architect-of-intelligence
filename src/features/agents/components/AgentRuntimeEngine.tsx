@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { agents } from "@/content";
 import { Section } from "@/components/layout/Section";
 import { AgentRuntimePreview } from "./AgentRuntimePreview";
@@ -24,13 +23,7 @@ export function AgentRuntimeEngine() {
               className={agent.id === selected.id ? "active" : ""}
               onClick={() => setSelected(agent)}
             >
-              {agent.id === selected.id && (
-                <motion.span
-                  className="agent-tab-glow"
-                  layoutId="agent-tab-glow"
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                />
-              )}
+              {agent.id === selected.id && <span className="agent-tab-glow" />}
               <span>{agent.name}</span>
             </button>
           ))}

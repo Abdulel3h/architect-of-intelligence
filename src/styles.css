@@ -129,7 +129,7 @@
   html {
     overflow-x: hidden;
     scroll-behavior: smooth;
-    background: #08080a;
+    background: #050609;
     color-scheme: dark;
   }
 
@@ -137,7 +137,7 @@
     min-height: 100svh;
     margin: 0;
     overflow-x: hidden;
-    background: #08080a;
+    background: #050609;
     color: var(--foreground);
     font-family: var(--font-body);
     font-optical-sizing: auto;
@@ -220,193 +220,37 @@
     background: transparent !important;
   }
 
+  .app-shell::before,
+  .app-shell::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .app-shell::before {
+    z-index: -2;
+    background:
+      radial-gradient(circle at 18% 14%, oklch(0.62 0.08 215 / 20%), transparent 32rem),
+      radial-gradient(circle at 82% 4%, oklch(0.72 0.03 150 / 13%), transparent 26rem),
+      radial-gradient(circle at 58% 88%, oklch(0.38 0.08 280 / 18%), transparent 34rem),
+      linear-gradient(145deg, #050609 0%, #090d13 48%, #040507 100%);
+  }
+
+  .app-shell::after {
+    z-index: -1;
+    opacity: 0.22;
+    background-image:
+      linear-gradient(90deg, oklch(1 0 0 / 8%) 1px, transparent 1px),
+      linear-gradient(0deg, oklch(1 0 0 / 6%) 1px, transparent 1px);
+    background-size: 96px 96px;
+    -webkit-mask-image: radial-gradient(circle at 50% 18%, black, transparent 68%);
+    mask-image: radial-gradient(circle at 50% 18%, black, transparent 68%);
+  }
+
   .container-grid {
     width: min(100% - clamp(1rem, 4vw, 4rem), 1240px);
     margin-inline: auto;
-  }
-
-  .liquid-page-background {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-    background: #070709;
-  }
-
-  .liquid-backdrop-image,
-  .liquid-texture,
-  .liquid-lens-field,
-  .liquid-noise {
-    position: absolute;
-    inset: 0;
-  }
-
-  .liquid-backdrop-image {
-    inset: -4rem;
-    background:
-      linear-gradient(180deg, oklch(0 0 0 / 18%), oklch(0 0 0 / 58%)),
-      url("/assets/background.webp") center / cover no-repeat;
-    filter: brightness(0.72) saturate(1.18) contrast(1.06);
-    transform: scale(1.04);
-  }
-
-  .liquid-texture {
-    inset: -12%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: min(86rem, 130vw);
-    mix-blend-mode: screen;
-    opacity: 0.2;
-    filter: blur(24px) saturate(1.45);
-    will-change: transform;
-  }
-
-  .liquid-texture-chrome {
-    background-image: url("/assets/chrome1.png");
-  }
-
-  .liquid-texture-silk {
-    background-image: url("/assets/silk1.png");
-    opacity: 0.16;
-    mix-blend-mode: lighten;
-  }
-
-  .liquid-lens-field {
-    background:
-      linear-gradient(90deg, oklch(1 0 0 / 6%) 1px, transparent 1px),
-      linear-gradient(0deg, oklch(1 0 0 / 4%) 1px, transparent 1px),
-      radial-gradient(ellipse at 50% 12%, oklch(1 0 0 / 18%), transparent 34rem),
-      linear-gradient(180deg, transparent 0 56%, oklch(0 0 0 / 54%) 100%);
-    background-size:
-      96px 96px,
-      96px 96px,
-      auto,
-      auto;
-    opacity: 0.42;
-  }
-
-  .liquid-noise {
-    opacity: 0.08;
-    background-image:
-      repeating-linear-gradient(90deg, oklch(1 0 0 / 60%) 0 1px, transparent 1px 3px),
-      repeating-linear-gradient(0deg, oklch(1 0 0 / 40%) 0 1px, transparent 1px 4px);
-    mix-blend-mode: overlay;
-  }
-
-  .liquid-glass {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    border: 1px solid var(--glass-line);
-    border-radius: 2.1rem;
-    background:
-      linear-gradient(135deg, oklch(1 0 0 / 22%), oklch(1 0 0 / 5%) 46%, oklch(0 0 0 / 20%)),
-      oklch(0.1 0.01 260 / 22%);
-    box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 34%),
-      inset 0 -1px 0 oklch(1 0 0 / 11%),
-      var(--glass-shadow);
-  }
-
-  .liquid-glass-block {
-    width: 100%;
-  }
-
-  .liquid-glass-inline {
-    display: inline-flex;
-    vertical-align: middle;
-  }
-
-  .liquid-glass.button {
-    transform-origin: top center;
-    box-shadow:
-      inset 0 0 4px oklch(1 0 0 / 48%),
-      0 18px 48px oklch(0 0 0 / 28%);
-  }
-
-  .lg-overlay-bg,
-  .lg-bg-container,
-  .lg-filter-layer {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-
-  .lg-overlay-bg {
-    z-index: 1;
-  }
-
-  .lg-bg-container {
-    z-index: 0;
-    overflow: hidden;
-  }
-
-  .lg-bg-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    display: block;
-    width: 100%;
-    opacity: 0.78;
-    transform: translate(-50%, -50%);
-    transform-origin: center;
-    will-change: transform;
-  }
-
-  .liquid-glass:hover .lg-bg-image:not(.is-frozen) {
-    animation: liquid-spin 20s linear infinite;
-  }
-
-  .lg-bg-image img {
-    display: block;
-    max-width: none;
-    object-fit: cover;
-    user-select: none;
-    pointer-events: none;
-  }
-
-  .lg-filter-layer {
-    z-index: 2;
-  }
-
-  .glass-box {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-  }
-
-  .glass-box.glass-black {
-    background: #09090b80;
-    box-shadow: inset 0 0 4px 0 #fafafa80;
-    filter: brightness(0.6);
-  }
-
-  .glass-box.glass-white {
-    background: #fafafa80;
-    box-shadow: inset 0 0 4px 0 #fafafa80;
-  }
-
-  .glass-box.glass-transparent {
-    background: #09090b00;
-    box-shadow: inset 0 0 4px 0 #fafafa80;
-  }
-
-  .lg-content {
-    position: relative;
-    z-index: 3;
-    display: block;
-    width: 100%;
-  }
-
-  @keyframes liquid-spin {
-    from {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    to {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
   }
 
   .scroll-progress {
@@ -436,7 +280,14 @@
 
   .nav-shell {
     width: min(100%, 1160px);
+    border: 1px solid oklch(1 0 0 / 13%);
     border-radius: 999px;
+    background:
+      linear-gradient(135deg, oklch(1 0 0 / 10%), oklch(1 0 0 / 4%)),
+      oklch(0.08 0.008 260 / 86%);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 12%),
+      0 18px 70px oklch(0 0 0 / 30%);
   }
 
   .nav-shell-content {
@@ -600,7 +451,7 @@
   .hero-shell {
     position: relative;
     z-index: 1;
-    min-height: 100svh;
+    min-height: 94svh;
     display: flex;
     align-items: center;
     padding-block: clamp(7.5rem, 12vw, 10rem) clamp(3rem, 7vw, 6rem);
@@ -608,9 +459,18 @@
 
   .hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.52fr);
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.48fr);
     align-items: center;
     gap: clamp(1.4rem, 5vw, 4rem);
+  }
+
+  .hero-animate-in {
+    animation: fade-rise 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity;
+  }
+
+  .hero-animate-in-delayed {
+    animation-delay: 90ms;
   }
 
   .hero-content {
@@ -632,14 +492,9 @@
     color: oklch(1 0 0 / 72%);
   }
 
-  .hero-title-glass {
+  .hero-title-panel {
     width: min(100%, 920px);
     margin-top: 1rem;
-    border-radius: clamp(1.75rem, 4vw, 3.15rem);
-  }
-
-  .hero-title-glass-content {
-    padding: clamp(1rem, 2.6vw, 2.35rem) clamp(1rem, 3.2vw, 2.75rem);
   }
 
   .hero-title {
@@ -686,22 +541,85 @@
     background: oklch(1 0 0 / 8%);
     color: oklch(1 0 0 / 66%);
     padding: 0.55rem 0.75rem;
-    backdrop-filter: blur(14px) saturate(150%);
   }
 
-  .hero-console-wrap {
+  .hero-visual {
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+  }
+
+  .hero-logo-stage {
+    position: relative;
+    width: min(100%, 34rem);
+    min-height: clamp(19rem, 38vw, 32rem);
+    aspect-ratio: 1;
+    contain: layout paint size;
+  }
+
+  .hero-logo-stage::before {
+    content: "";
+    position: absolute;
+    inset: 12%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, oklch(0.84 0.05 215 / 24%), transparent 58%),
+      radial-gradient(circle, oklch(1 0 0 / 12%), transparent 72%);
+  }
+
+  .custom-3d-logo,
+  .custom-3d-logo canvas,
+  .hero-3d-fallback {
+    position: absolute;
+    inset: 0;
+    display: block;
     width: 100%;
+    height: 100%;
   }
 
-  .hero-console {
-    min-height: 34rem;
-    border-radius: 2.4rem;
+  .hero-3d-fallback {
+    display: grid;
+    place-items: center;
   }
 
-  .hero-console-content {
-    display: flex;
-    min-height: 34rem;
-    flex-direction: column;
+  .hero-3d-ring,
+  .hero-3d-core {
+    position: absolute;
+    border-radius: 999px;
+  }
+
+  .hero-3d-ring-outer {
+    width: 48%;
+    aspect-ratio: 1;
+    border: 1px solid oklch(1 0 0 / 42%);
+    transform: rotateX(62deg) rotateZ(18deg);
+  }
+
+  .hero-3d-ring-inner {
+    width: 30%;
+    aspect-ratio: 1;
+    border: 1px solid oklch(0.84 0.05 215 / 50%);
+    transform: rotateX(28deg) rotateZ(-22deg);
+  }
+
+  .hero-3d-core {
+    width: 11%;
+    aspect-ratio: 1;
+    background: oklch(1 0 0 / 86%);
+    box-shadow: 0 0 44px oklch(0.84 0.05 215 / 44%);
+  }
+
+  .hero-system-card {
+    width: min(100%, 30rem);
+    overflow: hidden;
+    border: 1px solid oklch(1 0 0 / 12%);
+    border-radius: 0.5rem;
+    background:
+      linear-gradient(135deg, oklch(1 0 0 / 9%), oklch(1 0 0 / 3%)),
+      oklch(0.08 0.008 260 / 78%);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 10%),
+      0 22px 70px oklch(0 0 0 / 26%);
   }
 
   .console-statusbar {
@@ -847,11 +765,17 @@
   }
 
   .surface-card {
-    border-radius: 2rem;
-  }
-
-  .surface-card > .lg-content {
-    min-height: inherit;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid oklch(1 0 0 / 12%);
+    border-radius: 0.5rem;
+    background:
+      linear-gradient(145deg, oklch(1 0 0 / 8%), oklch(1 0 0 / 3%)),
+      oklch(0.09 0.009 260 / 76%);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 10%),
+      0 18px 62px oklch(0 0 0 / 22%);
+    contain: layout paint;
   }
 
   .proof-strip {
@@ -869,10 +793,9 @@
   .proof-item {
     min-height: 8rem;
     border: 1px solid var(--glass-line-soft);
-    border-radius: 1.6rem;
+    border-radius: 0.5rem;
     background: oklch(1 0 0 / 8%);
     padding: 1.2rem;
-    backdrop-filter: blur(18px) saturate(150%);
     box-shadow:
       inset 0 1px 0 oklch(1 0 0 / 16%),
       0 16px 56px oklch(0 0 0 / 24%);
@@ -914,11 +837,12 @@
     box-shadow:
       inset 0 1px 0 oklch(1 0 0 / 24%),
       0 18px 58px oklch(0 0 0 / 26%);
-    backdrop-filter: blur(18px) saturate(160%);
     transition:
       border-color 180ms ease,
       background 180ms ease,
-      color 180ms ease;
+      color 180ms ease,
+      transform 180ms ease;
+    will-change: transform;
   }
 
   .btn-primary {
@@ -935,6 +859,11 @@
 
   .btn-base:hover {
     border-color: oklch(1 0 0 / 34%);
+    transform: translate3d(0, -2px, 0);
+  }
+
+  .btn-base:active {
+    transform: translate3d(0, 0, 0) scale(0.985);
   }
 
   html[dir="rtl"] .btn-base svg {
@@ -1097,6 +1026,10 @@
     min-height: 22rem;
   }
 
+  .scanner-body-motion {
+    will-change: transform, opacity;
+  }
+
   .scanner-intake-grid,
   .scanner-readiness,
   .agent-live-input,
@@ -1158,7 +1091,6 @@
     outline: none;
     padding: 0.9rem 1rem;
     box-shadow: inset 0 1px 0 oklch(1 0 0 / 10%);
-    backdrop-filter: blur(16px) saturate(140%);
   }
 
   textarea {
@@ -1196,7 +1128,6 @@
       border-color 180ms ease,
       color 180ms ease,
       transform 180ms ease;
-    backdrop-filter: blur(14px) saturate(140%);
   }
 
   .chip {
@@ -1287,7 +1218,6 @@
     border-radius: 1.35rem;
     background: oklch(1 0 0 / 7%);
     box-shadow: inset 0 1px 0 oklch(1 0 0 / 10%);
-    backdrop-filter: blur(16px) saturate(145%);
   }
 
   .metric-tile {
@@ -1536,6 +1466,48 @@
 
   .form-status.error {
     color: oklch(0.76 0.16 35);
+  }
+
+  .reveal-surface {
+    animation: fade-rise 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity;
+  }
+
+  .section-loading {
+    min-height: 14rem;
+    border: 1px solid oklch(1 0 0 / 10%);
+    border-radius: 0.5rem;
+    background:
+      linear-gradient(135deg, oklch(1 0 0 / 7%), oklch(1 0 0 / 3%)),
+      oklch(0.08 0.008 260 / 58%);
+  }
+
+  @keyframes fade-rise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-animate-in,
+    .reveal-surface {
+      animation: none;
+      will-change: auto;
+    }
+
+    .btn-base {
+      will-change: auto;
+    }
+
+    .scanner-body-motion {
+      will-change: auto;
+    }
   }
 
   @media (max-width: 1120px) {

@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { labTools } from "@/content/home";
 import { Section } from "@/components/layout/Section";
 import { SurfaceCard } from "@/components/ui/surface-card";
@@ -22,13 +21,10 @@ export function AILabPreview() {
         <OpportunityScanner compact />
       </div>
       <div className="lab-tool-grid lab-tool-grid-wide">
-        {labTools.map((tool, index) => (
-          <motion.div
+        {labTools.map((tool) => (
+          <div
             key={tool.title}
-            initial={{ opacity: 0, y: 22 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
-            transition={{ duration: 0.55, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            className="reveal-surface"
           >
             <SurfaceCard className="tool-card">
               <div className="tool-icon">
@@ -40,7 +36,7 @@ export function AILabPreview() {
                 <p>{tool.description[language]}</p>
               </div>
             </SurfaceCard>
-          </motion.div>
+          </div>
         ))}
       </div>
     </Section>

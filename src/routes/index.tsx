@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Navigation from "@/components/Navigation";
 import ScrollProgress from "@/components/ScrollProgress";
-import { LiquidGlassBackground } from "@/components/visuals/LiquidGlassBackground";
 import { HomePage } from "@/features/home/components/HomePage";
 import { personJsonLd, siteConfig } from "@/lib/seo/site";
 import { useLanguage } from "@/lib/language/LanguageProvider";
@@ -40,7 +39,6 @@ function Index() {
 
   return (
     <div className="app-shell relative min-h-screen bg-background text-foreground selection:bg-white/30">
-      <LiquidGlassBackground />
       <Navigation />
       <ScrollProgress />
 

@@ -1,20 +1,20 @@
 import { lazy, Suspense } from "react";
-import { AILabPreview } from "./AILabPreview";
-import { ContactFunnelShell } from "./ContactFunnelShell";
-import { HomeHero } from "./HomeHero";
+import { HeroSection } from "./HeroSection";
 import { ProofStrip } from "./ProofStrip";
-import { Section } from "@/components/layout/Section";
-import { useLanguage } from "@/lib/language/LanguageProvider";
-import { homeCopy } from "@/lib/language/copy";
 
+const AILabPreview = lazy(() =>
+  import("./AILabPreview").then((m) => ({
+    default: m.AILabPreview,
+  })),
+);
 const AgentRuntimeEngine = lazy(() =>
   import("@/features/agents/components/AgentRuntimeEngine").then((m) => ({
     default: m.AgentRuntimeEngine,
   })),
 );
-const ArchitectureGenerator = lazy(() =>
-  import("@/features/architecture-generator/components/ArchitectureGenerator").then((m) => ({
-    default: m.ArchitectureGenerator,
+const ArchitectureGeneratorSection = lazy(() =>
+  import("./ArchitectureGeneratorSection").then((m) => ({
+    default: m.ArchitectureGeneratorSection,
   })),
 );
 const CaseStudyEngine = lazy(() =>
@@ -22,42 +22,36 @@ const CaseStudyEngine = lazy(() =>
     default: m.CaseStudyEngine,
   })),
 );
+const ContactFunnelShell = lazy(() =>
+  import("./ContactFunnelShell").then((m) => ({
+    default: m.ContactFunnelShell,
+  })),
+);
 
-// Loading fallback component
 function LoadingFallback() {
-  return (
-    <div className="flex items-center justify-center py-12">
-      <div className="animate-pulse text-muted-foreground">Loading...</div>
-    </div>
-  );
+  return <div className="section-loading" aria-hidden="true" />;
 }
 
 export function HomePage() {
-  const { language } = useLanguage();
-  const copy = homeCopy[language].generatorSection;
-
   return (
     <>
-      <HomeHero />
+      <HeroSection />
       <ProofStrip />
-      <AILabPreview />
+      <Suspense fallback={<LoadingFallback />}>
+        <AILabPreview />
+      </Suspense>
       <Suspense fallback={<LoadingFallback />}>
         <CaseStudyEngine />
       </Suspense>
       <Suspense fallback={<LoadingFallback />}>
         <AgentRuntimeEngine />
       </Suspense>
-      <Section
-        id="architecture-generator"
-        eyebrow={copy.eyebrow}
-        title={copy.title}
-        description={copy.description}
-      >
-        <Suspense fallback={<LoadingFallback />}>
-          <ArchitectureGenerator />
-        </Suspense>
-      </Section>
-      <ContactFunnelShell />
+      <Suspense fallback={<LoadingFallback />}>
+        <ArchitectureGeneratorSection />
+      </Suspense>
+      <Suspense fallback={<LoadingFallback />}>
+        <ContactFunnelShell />
+      </Suspense>
     </>
   );
 }

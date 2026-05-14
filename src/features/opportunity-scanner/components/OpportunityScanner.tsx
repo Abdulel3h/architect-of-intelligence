@@ -106,7 +106,7 @@ export function OpportunityScanner({ compact = false }: { compact?: boolean }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.18 }}
-          className="scanner-body"
+          className="scanner-body scanner-body-motion"
         >
           {step === 0 && (
             <div className="scanner-intake-grid">
