@@ -45,9 +45,12 @@ export function ArchitectureDiagram({ caseStudy }: { caseStudy: CaseStudy }) {
           );
         })}
       </div>
-      <pre className="mermaid-source" aria-label="Mermaid architecture source" dir="ltr">
-        {buildMermaidDiagram(caseStudy)}
-      </pre>
+      <div className="flowchart-scroll" tabIndex={0}>
+        <pre className="mermaid-source" aria-label="Mermaid architecture source" dir="ltr">
+          {buildMermaidDiagram(caseStudy)}
+        </pre>
+        <span className="scroll-hint">Scroll horizontally on mobile</span>
+      </div>
     </div>
   );
 }

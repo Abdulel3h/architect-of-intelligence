@@ -140,9 +140,12 @@ export function ArchitectureGenerator() {
 
         <DecisionPanel decision={architecture.decision} />
 
-        <pre className="mermaid-source" aria-label={copy.generator.technicalPlan} dir="ltr">
-          {view.mermaid}
-        </pre>
+        <div className="flowchart-scroll" tabIndex={0}>
+          <pre className="mermaid-source" aria-label={copy.generator.technicalPlan} dir="ltr">
+            {view.mermaid}
+          </pre>
+          <span className="scroll-hint">Scroll horizontally on mobile</span>
+        </div>
       </div>
     </SurfaceCard>
   );

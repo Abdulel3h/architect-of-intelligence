@@ -44,10 +44,12 @@ function Index() {
         <HomePage />
       </main>
 
-      <footer className="relative z-10 border-t border-white/10 py-10 text-center">
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-          {copy.ui.footer}
-        </p>
+      <footer className="site-footer">
+        <p>{copy.ui.footer}</p>
+        <div aria-label="Legal links">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+        </div>
       </footer>
     </div>
   );
