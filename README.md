@@ -77,7 +77,9 @@ Optional environment variables are documented in `src/lib/env.ts`. Server-only v
 
 ## Screenshots
 
-The repository includes screenshot/preview assets in `src/assets` and public images. Add updated product screenshots for the opportunity scanner, architecture generator, and bilingual agent flow.
+![Architect of Intelligence homepage](assets/screenshots/architect-home.png)
+
+Captured from the verified live deployment. Add workflow-specific captures for the opportunity scanner, architecture generator, and bilingual agent flow.
 
 ## System Design
 
@@ -108,7 +110,7 @@ supabase/migrations/   Data-layer migration
 ## Future Work
 
 - Add integration tests for `/api/ai/opportunity-scan`, `/api/ai/architecture`, and `/api/ai/agent-run`.
-- Add screenshots for each AI workflow.
+- Add screenshots for each AI workflow beyond the homepage.
 - Document the Supabase schema in more detail.
 - Add deployment notes for Vercel and Cloudflare separately.
 - Add an evaluation set for AI output quality.
