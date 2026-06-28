@@ -4,6 +4,8 @@
 
 # Architect of Intelligence
 
+[![CI](https://github.com/Abdulel3h/architect-of-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/Abdulel3h/architect-of-intelligence/actions/workflows/ci.yml)
+
 Architect of Intelligence is a production-oriented AI infrastructure and consulting platform prototype built with TanStack Start, React, TypeScript, and server-side AI workflow endpoints.
 
 ## Overview
@@ -17,6 +19,7 @@ The app presents an AI systems platform with opportunity scanning, architecture 
 - [Engineering Principles](docs/engineering-principles.md)
 - [Technical Decisions](docs/technical-decisions.md)
 - [Reviewer Guide](docs/reviewer-guide.md)
+- [Testing and CI](docs/testing.md)
 
 ## Features
 
@@ -70,6 +73,7 @@ npm run dev
 ```bash
 npm run dev
 npm run lint
+npm run typecheck
 npm run build
 npm run preview
 ```
