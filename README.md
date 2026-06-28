@@ -6,6 +6,10 @@ Architect of Intelligence is a production-oriented AI infrastructure and consult
 
 The app presents an AI systems platform with opportunity scanning, architecture generation, lead capture, event logging, bilingual Arabic/English output, and graceful fallbacks when external AI or data services are unavailable.
 
+## Documentation
+
+- [Architecture](docs/architecture.md)
+
 ## Features
 
 - AI opportunity scanner with structured output
@@ -114,4 +118,3 @@ Abdulelah Alkhathami
 
 - Website: [abdulelah.de](https://www.abdulelah.de)
 - GitHub: [Abdulel3h](https://github.com/Abdulel3h)
-
