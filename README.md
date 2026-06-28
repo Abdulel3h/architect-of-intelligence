@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/project-banner.svg" alt="Architect of Intelligence project banner" />
+</p>
+
 # Architect of Intelligence
 
 Architect of Intelligence is a production-oriented AI infrastructure and consulting platform prototype built with TanStack Start, React, TypeScript, and server-side AI workflow endpoints.
@@ -9,6 +13,8 @@ The app presents an AI systems platform with opportunity scanning, architecture 
 ## Documentation
 
 - [Architecture](docs/architecture.md)
+- [Engineering Principles](docs/engineering-principles.md)
+- [Technical Decisions](docs/technical-decisions.md)
 
 ## Features
 
