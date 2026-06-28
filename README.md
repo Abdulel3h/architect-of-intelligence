@@ -13,6 +13,7 @@ The app presents an AI systems platform with opportunity scanning, architecture 
 ## Documentation
 
 - [Architecture](docs/architecture.md)
+- [Case Study](docs/case-study.md)
 - [Engineering Principles](docs/engineering-principles.md)
 - [Technical Decisions](docs/technical-decisions.md)
 - [Reviewer Guide](docs/reviewer-guide.md)
